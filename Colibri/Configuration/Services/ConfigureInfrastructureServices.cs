@@ -9,7 +9,7 @@ public static class ConfigureInfrastructureServices
     {
         services.AddScoped<ITeamMemberService, TeamMemberService>();
         services.AddScoped<IErrorService, ErrorService>();
-
+        services.AddScoped<IPortfolioService, PortfolioService>();
 
         return services;
     }
