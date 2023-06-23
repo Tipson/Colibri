@@ -10,7 +10,7 @@ using Colibri.Models.Commands.Error;
 using Colibri.Utils;
 using Synopsis.Utils;
 
-namespace Synopsis.Controllers;
+namespace Colibri.Controllers;
 
 [ApiController]
 [Route("[controller]")]
