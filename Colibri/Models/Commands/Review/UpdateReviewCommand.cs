@@ -1,7 +1,7 @@
 ﻿namespace Colibri.Models.Commands.Review;
 
 public record UpdateReviewCommand(
-    string Id,
+    int Id,
     string Name,
     string CompanyName,
     string Description,

@@ -3,7 +3,6 @@ using Colibri.Infrastructure.DbContext;
 using Colibri.Infrastructure.Entities;
 using Colibri.Models.Commands.Portfolio;
 using Colibri.Models.Commands.Product;
-using Colibri.Models.Portfolios;
 using Colibri.Models.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -101,30 +100,5 @@ public class ProductService : IProductService
         await _dbContext
             .SaveChangesAsync(token)
             .ConfigureAwait(false);       
-    }
-
-    public Task<Product> Create(CreatePortfolioCommand command, CancellationToken token)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<Product> Get(GetPortfolioCommand command, CancellationToken token)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<IEnumerable<Product>> GetAll(GetAllPortfolioCommand command, CancellationToken token)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<Product> Update(UpdatePortfolioCommand command, CancellationToken token)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task Delete(DeletePortfolioCommand command, CancellationToken token)
-    {
-        throw new NotImplementedException();
     }
 }

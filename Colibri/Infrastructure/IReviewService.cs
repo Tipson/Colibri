@@ -1,13 +1,13 @@
-﻿using Colibri.Models.Commands.Portfolio;
+﻿using Colibri.Models.Commands.Review;
 using Colibri.Models.Reviews;
 
 namespace Colibri.Infrastructure;
 
 public interface IReviewService
 {
-    Task<Review> Create(CreatePortfolioCommand command, CancellationToken token);
-    Task<Review> Get(GetPortfolioCommand command, CancellationToken token);
-    Task<IEnumerable<Review>> GetAll(GetAllPortfolioCommand command, CancellationToken token);
-    Task<Review> Update(UpdatePortfolioCommand command, CancellationToken token);
-    Task Delete(DeletePortfolioCommand command, CancellationToken token);
+    Task<Review> Create(CreateReviewCommand command, CancellationToken token);
+    Task<Review> Get(GetReviewCommand command, CancellationToken token);
+    Task<IEnumerable<Review>> GetAll(GetAllReviewCommand command, CancellationToken token);
+    Task<Review> Update(UpdateReviewCommand command, CancellationToken token);
+    Task Delete(DeleteReviewCommand command, CancellationToken token);
 }

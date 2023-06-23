@@ -1,32 +1,107 @@
-﻿using Colibri.Models.Commands.Portfolio;
+﻿using AutoMapper;
+using Colibri.Infrastructure.DbContext;
+using Colibri.Infrastructure.Entities;
+using Colibri.Models.Commands.Portfolio;
+using Colibri.Models.Commands.Product;
+using Colibri.Models.Commands.Review;
 using Colibri.Models.Reviews;
+using Colibri.Models.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace Colibri.Infrastructure.Services;
 
 public class ReviewService : IReviewService
 {
-    public Task<Review> Create(CreatePortfolioCommand command, CancellationToken token)
+    private readonly ColibriDbContext _dbContext;
+    private readonly IMapper _mapper;
+
+    public ReviewService(ColibriDbContext dbContext, IMapper mapper)
     {
-        throw new NotImplementedException();
+        _dbContext = dbContext;
+        _mapper = mapper;
+    }
+    public async Task<Review> Create(CreateReviewCommand command, CancellationToken token)
+    {
+        var row = new ReviewRow(
+            command.Name,
+            command.CompanyName,
+            command.Description,
+            command.Position,
+            command.Logo,
+            command.Photo
+            );
+
+        await _dbContext.Reviews
+            .AddAsync(row, token)
+            .ConfigureAwait(false);
+        await _dbContext
+
+            .SaveChangesAsync(token)
+            .ConfigureAwait(false);
+
+        return _mapper.Map<Review>(row);    
     }
 
-    public Task<Review> Get(GetPortfolioCommand command, CancellationToken token)
+    public async Task<Review> Get(GetReviewCommand command, CancellationToken token)
     {
-        throw new NotImplementedException();
+        var row = await _dbContext.Portfolios
+            .AsNoTracking()
+            .SingleOrDefaultAsync(r => r.Id == command.Id, token)
+            .ConfigureAwait(false);
+
+        if (row is null)
+        {
+            throw new InvalidOperationException($"The Review with id = {command.Id} not found");
+        }
+        return _mapper.Map<Review>(row);        
     }
 
-    public Task<IEnumerable<Review>> GetAll(GetAllPortfolioCommand command, CancellationToken token)
+    public async Task<IEnumerable<Review>> GetAll(GetAllReviewCommand command, CancellationToken token)
     {
-        throw new NotImplementedException();
+        var rows = await _dbContext.Products
+            .AsNoTracking()
+            .ToListAsync(token);
+        
+        var model = _mapper.Map<List<Review>>(rows);
+        return model;        
     }
 
-    public Task<Review> Update(UpdatePortfolioCommand command, CancellationToken token)
+    public async Task<Review> Update(UpdateReviewCommand command, CancellationToken token)
     {
-        throw new NotImplementedException();
-    }
+        var row = await _dbContext.Reviews
+            .SingleOrDefaultAsync(r => r.Id == command.Id, token)
+            .ConfigureAwait(false);
 
-    public Task Delete(DeletePortfolioCommand command, CancellationToken token)
+        if (row is null)
+        {
+            throw new InvalidOperationException($"The Product with id = {command.Id} not found");
+        }
+
+        row.Name = command.Name;
+        row.CompanyName = command.CompanyName;
+        row.Position = command.Position;
+        row.Logo = command.Logo;
+        row.Photo = command.Photo;
+        
+        await _dbContext
+            .SaveChangesAsync(token)
+            .ConfigureAwait(false);
+        return _mapper.Map<Review>(row);           }
+
+    public async Task Delete(DeleteReviewCommand command, CancellationToken token)
     {
-        throw new NotImplementedException();
+        var row = await _dbContext.Reviews
+            .AsNoTracking()
+            .SingleOrDefaultAsync(r => r.Id == command.Id, token)
+            .ConfigureAwait(false);
+        if (row is null)
+        {
+            return;
+        }
+
+        _dbContext.Remove(row);
+        await _dbContext
+            .SaveChangesAsync(token)
+            .ConfigureAwait(false);       
     }
 }
