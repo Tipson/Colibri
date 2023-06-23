@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Colibri.Controllers;
 
+[ApiController]
+[Route("[controller]")]
 public class ProductController : ControllerBase
 {
     private readonly IProductService _productService;

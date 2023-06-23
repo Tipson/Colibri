@@ -1,4 +1,4 @@
-﻿namespace Colibri.Infrastructure.Entities;
+﻿namespace Colibri.Infrastructure.DbContext.Entities;
 
 public class StatisticRow
 {

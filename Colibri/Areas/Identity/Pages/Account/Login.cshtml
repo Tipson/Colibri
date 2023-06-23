@@ -1,0 +1,56 @@
+﻿@page
+@model Colibri.Areas.Identity.Pages.Account.LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+    Layout = "/Views/Shared/_Manage.cshtml";
+}
+ 
+
+
+<div class="block-container-min">
+
+    <form id="account" method="post">
+        <div class="_form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="item">
+                <div class="caption"><label asp-for="Input.UserName" class="form-label">Login</label></div>
+                <div class="input">
+                    <input asp-for="Input.UserName" class="form-control" autocomplete="username" aria-required="true" />
+                    <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="item">
+                <div class="caption"><label for="url"><label asp-for="Input.Password" class="form-label"></label></label></div>
+                <div class="input">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="item item-top">
+                <div class="caption"></div>
+                <div class="input">
+                    <div class="item-checkbox">
+                        <label asp-for="Input.RememberMe" class="form-label">
+                            <input class="form-check-input" asp-for="Input.RememberMe" />
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="item m10">
+                <div class="caption"> </div>
+                <div class="input"><input type="submit" id="login-submit" value="Login In" /></div>
+            </div>
+        </div>
+    </form>
+</div>
+ 
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

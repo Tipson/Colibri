@@ -1,50 +1,114 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+    string currUrl = Context.Request.HttpContext.Request.Path;
+    string title = ViewBag.Title + " — Synopsis Istanbul";
+    if (currUrl == "/")
+    {
+        title = "Synopsis Istanbul | October 5–6, 2023";
+    }
+    ViewBag.Title = title;
+
+}
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@ViewData["Title"] - Colibri</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/Colibri.styles.css" asp-append-version="true"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Source+Code+Pro:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/pc.css" />
+    <link rel="stylesheet" media="(max-width: 1400px)" href="/css/pc-light.min.css" />
+    <link rel="stylesheet" media="(max-width: 1023px)" href="/css/mobile.min.css" />
+
+
+    @RenderSection("head", required: false)
+
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Colibri</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </li>
-                </ul>
-                <partial name="_LoginPartial"/>
+    <div class="main">
+        <div class="header">
+            <div class="logo">
+                <a href="/"> <img src="/images/logo.webp" alt="Synopsis" /></a>
+                <div class="bar" id="bar">
+                    <div class="icon"></div>
+                </div>
+            </div>
+            <div class="nav" id="navMenu">
+                <a href="/">For attendees @*<div class="arrow">></div>*@</a>
+                <a href="/mediakit">For media @*<div class="arrow">></div*@</a>
+                <a href="/#speakers" id="aSpeakers">Speakers @*<div class="arrow">></div>*@</a>
+                <a href="/sponsors">Sponsorship @*<div class="arrow">></div*@</a>
+                <a class="disabled">Afterparty</a>
+                @*        <a href="/speakers">Contacts</a>*@
+            </div>
+            <div class="buttons" id="navButtons">
+                <a href="/sponsors" class="button_" id="navSponsor"><span>Become a sponsor</span> <div class="pic rhombus"></div></a>
+                <a href="/#tickets" class="button_ a-ticket" id="navTicket"><span>Book a ticket</span> <div class="pic ticket"></div></a>
             </div>
         </div>
-    </nav>
-</header>
-<div class="container">
-    <main role="main" class="pb-3">
-        @RenderBody()
-    </main>
-</div>
-
-<footer class="border-top footer text-muted">
-    <div class="container">
-        &copy; 2023 - Colibri - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <div class="content">@RenderBody()</div>
+        <div class="last-block"></div>
     </div>
-</footer>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
-@await RenderSectionAsync("Scripts", required: false)
+
+    <div class="footer">
+        <div class="footer-content">
+
+            <div class="footer_left">
+                <div class="logo"><img src="/images/logo.webp" alt="" /></div>
+            </div>
+
+            <div class="footer_right">
+                <div class="cap">Contact us:</div>
+                <div class="desc">
+                    <a href="/contacts" class="link-envelope"></a>
+                    <a href="https://t.me/synopsis_summit_support_bot" target="_blank" class="link-chat"></a>
+                    <a href="https://twitter.com/synopsisevents" target="_blank" class="link-twitter"></a>
+                    <a href="https://t.me/synopsis_summit" target="_blank" class="link-telegram"></a>
+                    <a href="https://www.instagram.com/synopsis_summit/" target="_blank" class="link-instagram"></a>
+
+                </div>
+            </div>
+
+            <div class="footer_center">
+                <div class="desc">
+                    © 2023  <span>Synopsis</span> <br />
+                    <a href="/terms">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="/lib/modernizr-2.8.3.js"></script>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/lib/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="/lib/jquery.unobtrusive-ajax.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        var is_show_menu = false;
+
+        $('#bar').click(function() {
+
+            if (!is_show_menu) {
+                $('#navMenu').addClass('block-show');
+                $('#navButtons').addClass('block-show');
+                is_show_menu = true;
+            }
+            else {
+                $('#navMenu').removeClass('block-show');
+                $('#navButtons').removeClass('block-show');
+                is_show_menu = false;
+            }
+        })
+    </script>
 </body>
 </html>

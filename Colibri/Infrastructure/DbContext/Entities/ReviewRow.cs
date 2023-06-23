@@ -1,4 +1,4 @@
-﻿namespace Colibri.Infrastructure.Entities;
+﻿namespace Colibri.Infrastructure.DbContext.Entities;
 
 public class ReviewRow
 {
@@ -16,8 +16,7 @@ public class ReviewRow
         string description,
         string position,
         string logo,
-        string photo
-        )
+        string photo)
     {
         Name = name;
         CompanyName = companyName;

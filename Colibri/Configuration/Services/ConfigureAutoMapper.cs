@@ -10,6 +10,11 @@ public static class ConfigureAutoMapper
         var mapperConfig = new MapperConfiguration(mc =>
         {
             mc.AddProfile(new TeamMemberProfile());
+            mc.AddProfile(new ErrorProfile());
+            mc.AddProfile(new PorfolioProfile());
+            mc.AddProfile(new ProductProfile());
+            mc.AddProfile(new ReviewProfile());
+            mc.AddProfile(new StatisticProfile());
         });
 
         var mapper = mapperConfig.CreateMapper();

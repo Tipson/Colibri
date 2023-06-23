@@ -3,6 +3,7 @@ using Colibri.Areas.Identity.Data;
 using Colibri.Configuration.Services;
 using Colibri.Infrastructure.DbContext;
 using Colibri.Infrastructure.Services;
+using Colibri.Middleware;
 using Microsoft.EntityFrameworkCore;
 using NJsonSchema.Generation;
 
@@ -23,6 +24,7 @@ public class Startup
         services.AddIdentityServices(Configuration);
         services.AddInfrastructureServices();
         services.AddColibriDbContext(Configuration);
+        services.AddLocalizationServices();
 
         services.AddDistributedMemoryCache();
 
@@ -45,6 +47,8 @@ public class Startup
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
     {
+        app.UseMiddleware<EnsureUserExistsMiddleware>();
+        
         if (env.IsDevelopment())
         {
             app.UseOpenApi(settings => settings.Path = "/api/swagger/{documentName}/swagger.json");
@@ -68,8 +72,6 @@ public class Startup
             synopsisDbContext.Database.Migrate();
             var synopsisAuthDbContext = scope.ServiceProvider.GetRequiredService<ColibriAuthContext>();
             synopsisAuthDbContext.Database.Migrate();
-            var userInitializer = scope.ServiceProvider.GetRequiredService<UserService>();
-            userInitializer.Execute();
         }
         
         app.UseHttpsRedirection();

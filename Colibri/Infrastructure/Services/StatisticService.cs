@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Colibri.Infrastructure.DbContext;
-using Colibri.Infrastructure.Entities;
+using Colibri.Infrastructure.DbContext.Entities;
 using Colibri.Models.Commands.Statistic;
 using Colibri.Models.Statistics;
 using Microsoft.EntityFrameworkCore;

@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Colibri.Controllers;
 
+[ApiController]
+[Route("[controller]")]
 public class StatisticController : ControllerBase
 {
     private readonly IStatisticService _statisticService;

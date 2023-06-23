@@ -4,7 +4,8 @@ using Colibri.Models.Reviews;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Colibri.Controllers;
-
+[ApiController]
+[Route("[controller]")]
 public class ReviewController : ControllerBase
 {
     private readonly IReviewService _reviewService;

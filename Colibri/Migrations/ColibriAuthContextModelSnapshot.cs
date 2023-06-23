@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Colibri.Migrations
 {
     [DbContext(typeof(ColibriAuthContext))]
-    partial class olibriAuthContextModelSnapshot : ModelSnapshot
+    partial class ColibriAuthContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -22,7 +22,7 @@ namespace Colibri.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Colibri.Areas.Data.ColibriUser", b =>
+            modelBuilder.Entity("Colibri.Areas.Identity.Data.ColibriUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -235,7 +235,7 @@ namespace Colibri.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Colibri.Areas.Data.ColibriUser", null)
+                    b.HasOne("Colibri.Areas.Identity.Data.ColibriUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -244,7 +244,7 @@ namespace Colibri.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Colibri.Areas.Data.ColibriUser", null)
+                    b.HasOne("Colibri.Areas.Identity.Data.ColibriUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -259,7 +259,7 @@ namespace Colibri.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Colibri.Areas.Data.ColibriUser", null)
+                    b.HasOne("Colibri.Areas.Identity.Data.ColibriUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -268,7 +268,7 @@ namespace Colibri.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Colibri.Areas.Data.ColibriUser", null)
+                    b.HasOne("Colibri.Areas.Identity.Data.ColibriUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

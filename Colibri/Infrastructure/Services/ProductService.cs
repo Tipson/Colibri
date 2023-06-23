@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Colibri.Infrastructure.DbContext;
-using Colibri.Infrastructure.Entities;
+using Colibri.Infrastructure.DbContext.Entities;
 using Colibri.Models.Commands.Portfolio;
 using Colibri.Models.Commands.Product;
 using Colibri.Models.Services;

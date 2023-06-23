@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer;
+
+@{
+    string menu_style = "";
+    if (ViewContext.RouteData.Values["controller"] == null)
+    {
+        menu_style = "display:none";
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="~/css/manage.css?v=1" rel="stylesheet">
+    @await RenderSectionAsync("head", required: false)
+</head>
+<body>
+    <div class="content">
+        <div class="block-header">
+            <div class="header">
+                <a class="logo" href="/manage">
+                    <div class="cc">Colibri</div>
+                </a>
+                <div class="nav" style="@menu_style">
+                    <a href="@Url.ActionLink(controller: "Manage", action: "Index")" class="a-menu">@Localizer["Speakers"]</a>
+                    <a href="@Url.ActionLink(controller: "Manage", action: "Partners")" class="a-menu">@Localizer["Partners"]</a>
+                    <a href="@Url.ActionLink(controller: "Manage", action: "SponsorPacks")" class="a-menu">@Localizer["SponsorPack"]</a>
+@*                    <a href="@Url.ActionLink(controller: "Manage", action: "Agendas")" class="a-menu">@Localizer["Agendas"]</a>*@
+                    <a href="@Url.ActionLink(controller: "Manage", action: "Locations")" class="a-menu">@Localizer["Locations"]</a>
+
+
+                </div>
+            </div>
+        </div>
+        @RenderSection("underHead", required: false)
+        <div class="block-main">
+            @RenderBody()
+        </div>
+        <div class="cont last-cont" id="lastCont"></div>
+    </div>
+
+    <div id="bottomCont">
+        <div class="copy" id="copyCont">
+            © 2023  <strong>Colibri Group</strong><br />
+        </div>
+    </div>
+
+
+    <script src="~/lib/modernizr-2.8.3.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="~/lib/jquery.unobtrusive-ajax.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

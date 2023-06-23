@@ -1,5 +1,4 @@
 ﻿using Colibri.Infrastructure.DbContext.Entities;
-using Colibri.Infrastructure.Entities;
 using Colibri.Models.Portfolios;
 using Colibri.Models.Reviews;
 using Colibri.Models.Services;

@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
 using Colibri.Infrastructure.DbContext;
-using Colibri.Infrastructure.Entities;
-using Colibri.Models.Commands.Portfolio;
-using Colibri.Models.Commands.Product;
+using Colibri.Infrastructure.DbContext.Entities;
 using Colibri.Models.Commands.Review;
 using Colibri.Models.Reviews;
-using Colibri.Models.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Colibri.Infrastructure.Services;
@@ -44,7 +41,7 @@ public class ReviewService : IReviewService
 
     public async Task<Review> Get(GetReviewCommand command, CancellationToken token)
     {
-        var row = await _dbContext.Portfolios
+        var row = await _dbContext.Reviews
             .AsNoTracking()
             .SingleOrDefaultAsync(r => r.Id == command.Id, token)
             .ConfigureAwait(false);
@@ -58,7 +55,7 @@ public class ReviewService : IReviewService
 
     public async Task<IEnumerable<Review>> GetAll(GetAllReviewCommand command, CancellationToken token)
     {
-        var rows = await _dbContext.Products
+        var rows = await _dbContext.Reviews
             .AsNoTracking()
             .ToListAsync(token);
         

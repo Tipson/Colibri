@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Colibri.Controllers;
 
+[ApiController]
+[Route("[controller]")]
 public class PortfolioController : ControllerBase
 {
     private readonly IPortfolioService _portfolioService;

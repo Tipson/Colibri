@@ -11,12 +11,10 @@ public static class ConfigureIdentityServices
     public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<ColibriAuthContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("ColibriAuthContextConnection")));
-
+            options.UseSqlServer(
+                configuration.GetConnectionString("ColibriAuthContextConnection")));
         services.AddDefaultIdentity<ColibriUser>()
-            .AddEntityFrameworkStores<ColibriAuthContext>()
-            .AddUserManager<UserManager<ColibriUser>>()
-            .AddSignInManager<SignInManager<ColibriUser>>();        
+            .AddEntityFrameworkStores<ColibriAuthContext>();
         services.AddTransient<UserService>();
         
         services.AddRazorPages();

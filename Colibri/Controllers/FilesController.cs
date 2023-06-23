@@ -8,7 +8,6 @@ using SixLabors.ImageSharp.Formats.Webp;
 using Colibri.Infrastructure;
 using Colibri.Models.Commands.Error;
 using Colibri.Utils;
-using Synopsis.Utils;
 
 namespace Colibri.Controllers;
 

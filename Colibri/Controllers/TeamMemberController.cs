@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Colibri.Controllers;
 
+[ApiController]
+[Route("[controller]")]
 public class TeamMemberController : ControllerBase
 {
     private readonly ITeamMemberService _teamMemberService;

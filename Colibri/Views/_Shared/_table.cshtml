@@ -1,0 +1,43 @@
+﻿@inject IViewLocalizer Localizer
+
+@using Microsoft.AspNetCore.Mvc.Localization
+@model Dictionary<string, dynamic>
+@{
+    Synopsis.Models.TableColumn[] columns = Model["Columns"];
+    string listPath = Model["List"];
+    int pageSize = (Model["PageSize"] != null) ? Model["PageSize"] : 60;
+    string tableClass = (Model["TableClass"] != null) ? Model["TableClass"] : "";
+    string headClass = (Model.ContainsKey("HeadClass")) ? Model["HeadClass"] : "head-cont";
+}
+
+<div class="table-cont @tableClass" id="tableCont">
+    <table class="items" cellpadding="0" cellspacing="0" id="itemList">
+        <thead>
+            <tr class="head-tr" id="tableHead">
+                @for (int i = 0; i < columns.Length; ++i)
+                {
+                    <th style="@("width:" + columns[i].procent.ToString() + "%")"><span onclick="_sortColumn(this.id)" id="@(columns[i].id + "2")">@columns[i].caption</span></th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+        @await Html.PartialAsync(listPath)
+        </tbody>
+    </table>
+</div>
+<div class="block-break" id="loading" style="display:none;">
+    <div class="loading" style="display:block;">
+        <i class="fad fa-spinner-third fa-spin"></i>
+    </div>
+</div>
+
+@if (ViewBag.Items.Count == pageSize)
+{
+    <div class="block-more m10" id="more">
+        <i onclick="javascript:getMore()" class="more">@Localizer["More"]</i>
+    </div>
+
+}
+
+<style id="tableStyle">
+</style>

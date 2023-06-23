@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc.Localization;
+using Synopsis.Models;
 
 namespace Colibri.Utils;
 
 public class Select
 {
-    /*
+    
     public static Dictionary<string, dynamic> GetSpeakersTable(IViewLocalizer viewLocalizer, string listPath = "_speakerList")
      {
          Dictionary<string, dynamic> tableElem = new Dictionary<string, dynamic>();
@@ -90,7 +91,4 @@ public class Select
          tableElem["TableClass"] = "";
          return tableElem;
      }
-     //return;
-*/
-        
 }
