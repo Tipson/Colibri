@@ -20,7 +20,7 @@ public  class ColibriDbContext : Microsoft.EntityFrameworkCore.DbContext
     public virtual DbSet<ErrorRow> Errors { get; set; } = null!;
     public virtual DbSet<ProductRow> Products { get; set; }
     public virtual DbSet<PortfolioRow> Portfolios { get; set; }
-    public virtual DbSet<Statistic> Statistics { get; set; }
+    public virtual DbSet<StatisticRow> Statistics { get; set; }
     public virtual DbSet<ReviewRow> Reviews { get; set; }
     public virtual DbSet<TeamMemberRow> TeamMembers { get; set; }
 }
