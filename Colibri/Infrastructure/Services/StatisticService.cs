@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
 using Colibri.Infrastructure.DbContext;
 using Colibri.Infrastructure.Entities;
-using Colibri.Models.Commands.Portfolio;
-using Colibri.Models.Commands.Review;
 using Colibri.Models.Commands.Statistic;
-using Colibri.Models.Portfolios;
-using Colibri.Models.Reviews;
 using Colibri.Models.Statistics;
 using Microsoft.EntityFrameworkCore;
 
