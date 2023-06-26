@@ -71,7 +71,7 @@ public class ReviewService : IReviewService
 
         if (row is null)
         {
-            throw new InvalidOperationException($"The Product with id = {command.Id} not found");
+            throw new InvalidOperationException($"The Review with id = {command.Id} not found");
         }
 
         row.Name = command.Name;

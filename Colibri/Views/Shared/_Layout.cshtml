@@ -3,10 +3,10 @@
 
 @{
     string currUrl = Context.Request.HttpContext.Request.Path;
-    string title = ViewBag.Title + " — Synopsis Istanbul";
+    string title = ViewBag.Title;
     if (currUrl == "/")
     {
-        title = "Synopsis Istanbul | October 5–6, 2023";
+        title = "Colibri-Group";
     }
     ViewBag.Title = title;
 
@@ -33,23 +33,21 @@
     <div class="main">
         <div class="header">
             <div class="logo">
-                <a href="/"> <img src="/images/logo.webp" alt="Synopsis" /></a>
+                <a href="/"> <img src="/images/logo.webp" alt="Colibri" /></a>
                 <div class="bar" id="bar">
                     <div class="icon"></div>
                 </div>
             </div>
-            <div class="nav" id="navMenu">
-                <a href="/">For attendees @*<div class="arrow">></div>*@</a>
-                <a href="/mediakit">For media @*<div class="arrow">></div*@</a>
-                <a href="/#speakers" id="aSpeakers">Speakers @*<div class="arrow">></div>*@</a>
-                <a href="/sponsors">Sponsorship @*<div class="arrow">></div*@</a>
+            @*<div class="nav" id="navMenu">
+                <a href="/#speakers" id="aSpeakers">Speakers <div class="arrow">></div></a>
+                <a href="/sponsors">Sponsorship @*<div class="arrow">></div</a>
                 <a class="disabled">Afterparty</a>
-                @*        <a href="/speakers">Contacts</a>*@
-            </div>
+                <a href="/speakers">Contacts</a>
+            </div> 
             <div class="buttons" id="navButtons">
                 <a href="/sponsors" class="button_" id="navSponsor"><span>Become a sponsor</span> <div class="pic rhombus"></div></a>
                 <a href="/#tickets" class="button_ a-ticket" id="navTicket"><span>Book a ticket</span> <div class="pic ticket"></div></a>
-            </div>
+            </div> *@
         </div>
         <div class="content">@RenderBody()</div>
         <div class="last-block"></div>
@@ -76,7 +74,7 @@
 
             <div class="footer_center">
                 <div class="desc">
-                    © 2023  <span>Synopsis</span> <br />
+                    © 2023  <span>Colibri</span> <br />
                     <a href="/terms">Terms & Conditions</a>
                 </div>
             </div>

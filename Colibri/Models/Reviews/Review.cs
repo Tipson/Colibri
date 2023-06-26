@@ -8,5 +8,5 @@ public class Review
     public string Description { get; set; }
     public string Position { get; set; }
     public string Logo { get; set; }
-    public int Photo { get; set; }
+    public string Photo { get; set; }
 }

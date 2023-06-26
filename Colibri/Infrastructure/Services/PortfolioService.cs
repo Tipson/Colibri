@@ -83,7 +83,7 @@ public class PortfolioService : IPortfolioService
 
     public async Task Delete(DeletePortfolioCommand command, CancellationToken token)
     {
-        var row = await _dbContext.TeamMembers
+        var row = await _dbContext.Portfolios
             .AsNoTracking()
             .SingleOrDefaultAsync(r => r.Id == command.Id, token)
             .ConfigureAwait(false);

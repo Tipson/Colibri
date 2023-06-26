@@ -41,14 +41,14 @@ public class ProductService : IProductService
 
     public async Task<Product> Get(GetProductCommand command, CancellationToken token)
     {
-        var row = await _dbContext.Portfolios
+        var row = await _dbContext.Products
             .AsNoTracking()
             .SingleOrDefaultAsync(r => r.Id == command.Id, token)
             .ConfigureAwait(false);
 
         if (row is null)
         {
-            throw new InvalidOperationException($"The Portfolio with id = {command.Id} not found");
+            throw new InvalidOperationException($"The Product with id = {command.Id} not found");
         }
         return _mapper.Map<Product>(row);        
     }
