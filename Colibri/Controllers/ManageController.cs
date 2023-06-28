@@ -2,6 +2,8 @@
 using Colibri.Models.Commands.Portfolio;
 using Colibri.Models.Commands.Product;
 using Colibri.Models.Commands.Review;
+using Colibri.Models.Commands.Statistic;
+using Colibri.Models.Commands.TeamMember;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -43,6 +45,18 @@ public class ManageController : Controller
     public async Task<IActionResult> Reviews(CancellationToken token = default)
     {
         ViewBag.Items = await _reviewService.GetAll(new GetAllReviewCommand(), token);
+        return View();
+    }
+    
+    public async Task<IActionResult> Statistics(CancellationToken token = default)
+    {
+        ViewBag.Items = await _statisticService.GetAll(new GetAllStatisticCommand(), token);
+        return View();
+    }
+    
+    public async Task<IActionResult> TeamMembers(CancellationToken token = default)
+    {
+        ViewBag.Items = await _teamMemberService.GetAll(new GetAllTeamMemberCommand(), token);
         return View();
     }
     
@@ -89,6 +103,36 @@ public class ManageController : Controller
     public async Task<ActionResult> EditReview([FromRoute] int id, CancellationToken token = default)
     {
         ViewBag.Item = await _reviewService.Get(new GetReviewCommand(id), token);
+        return View();
+    }
+    
+    [HttpGet]
+    [Route("addStatistic")]
+    public ActionResult AddStatistic()
+    {
+        return View();
+    }
+    
+    [HttpGet]
+    [Route("editStatistic/{id}")] 
+    public async Task<ActionResult> EditStatistic([FromRoute] int id, CancellationToken token = default)
+    {
+        ViewBag.Item = await _statisticService.Get(new GetStatisticCommand(id), token);
+        return View();
+    }
+    
+    [HttpGet]
+    [Route("addTeamMember")]
+    public ActionResult AddTeamMember()
+    {
+        return View();
+    }
+    
+    [HttpGet]
+    [Route("editTeamMember/{id}")] 
+    public async Task<ActionResult> EditTeamMember([FromRoute] int id, CancellationToken token = default)
+    {
+        ViewBag.Item = await _teamMemberService.Get(new GetTeamMemberCommand(id), token);
         return View();
     }
 }
