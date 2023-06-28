@@ -1,16 +1,10 @@
-﻿@using Microsoft.AspNetCore.Mvc.Localization
-@using Microsoft.AspNetCore.Mvc.TagHelpers
-@using SelectListItem = Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
 @using Colibri.Models.Portfolios
 @model Colibri.Models.Commands.Portfolio.UpdatePortfolioCommand
-@inject IViewLocalizer Localizer
 
 @{
     ViewBag.Title = "Colibri Control Panel";
     Layout = "~/Views/Shared/_Manage.cshtml";
-
-    List<SelectListItem> partnerList = new List<SelectListItem>();
-    List<SelectListItem> sponsorPackList = new List<SelectListItem>();
     
     List<Portfolio>? portfolios = ViewBag.Portfolios;
 
@@ -19,12 +13,12 @@
     Context.Request.Query.TryGetValue("s", out queryVal);
     string status_style = (queryVal.Count == 0) ? "display: none" : "";
     
-    Colibri.Models.Portfolios.Portfolio item = ViewBag.Item;
+    Portfolio item = ViewBag.Item;
 
 }
 <div class="block-container-mid">
 
-    <form action="@Url.ActionLink(controller: "Porfolio", action: "Update")"
+    <form action="@Url.ActionLink(controller: "Portfolio", action: "Update")"
           data-ajax="true" method="POST" type="PUT" data-ajax-method="POST"
           data-ajax-failure="failForm" data-ajax-success="successForm">
         <div class="_form" id="formAdd">
@@ -34,20 +28,83 @@
             <div class="media_" id="mediaList"></div>
             @Html.HiddenFor(model => model.Id, new { Value = item.Id })
             
-
+            <div class="item">
+                <div class="caption"><label for="brandName">Brand Name</label></div>
+                <div class="input">
+                    @Html.TextBoxFor(model => model.BrandName, new { autocomplete = "off", value = item.BrandName })
+                </div>
+            </div>
+            <div class="item">
+                <div class="caption"><label for="description">Description</label></div>
+                <div class="input">
+                    @Html.TextBoxFor(model => model.Description, new { autocomplete = "off", value = item.Description })
+                </div>
+            </div>
+            <div class="item item-top m20">
+                <div class="caption">Image</div>
+                <div class="input">
+                    <div class="tools-buttons tools-icons">
+                        <div class="tools">
+                            <div class="tool" id="toolUpload">
+                                Upload
+                                <input type="file" id="photoUpload" class="upload-hidden" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media_" id="mediaList">
+                    </div>
+                    @Html.HiddenFor(model => model.Image, new { id = "Image", value = item.Image })
+                    @Html.HiddenFor(model => model.Id, new { value = item.Id })
+                </div>
+            </div>
             <div class="item m10">
                 <div class="caption"> </div>
-                <div class="input"><input type="submit" value=@Localizer["Save"] /></div>
+                <div class="input"><input type="submit" value=Save></div>
             </div>
         </div>
     </form>
 </div>
 
 @section Scripts {
+
     <script type="text/javascript">
+
+        $('#Image').change(function() {
+            var result = $('#Image').val();
+            if (result.trim() !== '') {
+                var ret = '<img src="/images/portfolios/' + result + '"/>';
+                $('#mediaList').html(ret);
+            }
+        })
+        $('#photoUpload').on('change', function(e) {
+            var files = e.target.files;
+            if (files.length > 0) {
+                if (window.FormData !== undefined) {
+                    var data = new FormData();
+                    for (var x = 0; x < files.length; x++) {
+                        data.append("file" + x, files[x]);
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.ActionLink(controller: "Files", action: "UploadFile")?f=portfolios',
+                        contentType: false,
+                        processData: false,
+                        data: data,
+                        success: function(result) {
+                            $('#Image').val(result);
+                            $('#Image').change();
+                        },
+                        error: function(xhr, status, p3, p4) {
+                        }
+                    });
+                } else {
+                    alert("This browser doesn't support HTML5 file uploads!");
+                }
+            }
+        });
         function successForm(data) {
             if (data != -1) {
-                location.href = '/manage/editPortfolio/@(item.Id)?s=1'
+            location.href = '/editPortfolio/@(item.Id)?s=1'
             }
             else if (data == -1) {
                 $('#divValidationSummary li').remove();
@@ -56,12 +113,12 @@
         }
         function failForm(request, error) {
         }
-
+        
         $(document).ready(function() {
-            $('#NamePlace').val('@item.Description');
-            $('#CoordinateX').val('@item.BrandName');
+                    $('#BrandName').val('@item.BrandName');
+                    $('#Description').val('@item.Description');
+                    $('#Image').val('@item.Image');
+                    $('#Image').change();
         })
-
-
     </script>
 }
