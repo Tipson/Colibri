@@ -1,5 +1,5 @@
 ﻿@{
-    List<Colibri.Models.Portfolios.Portfolio> itemList = ViewBag.Items;
+    List<Colibri.Models.Statistics.Statistic> itemList = ViewBag.Items;
 }
 
 @if (itemList != null || itemList!.Count > 0)
@@ -14,17 +14,17 @@
         
         <tr class="item @style" id="item {@item.Id}">
             <td>
-                @item.Id
+                @item.Name
             </td>
             <td>
-                @item.BrandName
+                @item.CountFollowers
             </td>
             <td>
-                @item.Description
+                @item.CountViews
             </td>
             <td class="td-admin-tool">
                 <a href="javascript:void(0)" onclick="updateEvent(@item.Id)" id="delete@(item.Id)">@button_caption</a>
-                <a href="@Url.Action("editPortfolio", "Manage", new { id = item.Id })" onclick="javascript:event.stopPropagation();">Edit</a>
+                <a href="@Url.Action("editStatistic", "Manage", new { id = item.Id })" onclick="javascript:event.stopPropagation();">Edit</a>
                 <input type="hidden" id="status@(item.Id)" value="@item.Id"/>
             </td>
         </tr>

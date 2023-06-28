@@ -1,0 +1,113 @@
+﻿@model Colibri.Models.Commands.Statistic.CreateStatisticCommand
+
+@{
+    ViewBag.Title = "Colibri Control Panel";
+    Layout = "/Views/Shared/_Manage.cshtml";
+
+    Microsoft.Extensions.Primitives.StringValues queryVal;
+    Context.Request.Query.TryGetValue("s", out queryVal);
+    string status_style = (queryVal.Count == 0) ? "display: none" : "";
+}
+
+<div class="block-container-mid">
+
+    <form action="@Url.Action("Create", "Statistic")"
+          data-ajax="true" data-ajax-method="POST"
+          data-ajax-failure="failForm" data-ajax-success="successForm">
+        <div class="_form" id="formAdd">
+            <div id="success" class="success-item" style="@status_style">Successfully added</div>
+            <div id="error" class="error" style="display:none;">Error</div>
+            <div id="divValidationSummary">@Html.ValidationSummary()</div>
+            
+            <div class="item">
+                <div class="caption"><label for="name">Name</label></div>
+                <div class="input">
+                    @Html.TextBoxFor(model => model.Name, new { autocomplete = "off" })
+                </div>
+            </div>
+            <div class="item">
+                <div class="caption"><label for="description">Description</label></div>
+                <div class="input">
+                    @Html.TextBoxFor(model => model.Description, new { autocomplete = "off" })
+                </div>
+            </div>
+            <div class="item">
+                <div class="caption"><label for="countFollowers">CountFollowers</label></div>
+                <div class="input">
+                    @Html.TextBoxFor(model => model.CountFollowers, new { autocomplete = "off" })
+                </div>
+            </div>
+            <div class="item">
+                <div class="caption"><label for="countViews">CountViews</label></div>
+                <div class="input">
+                    @Html.TextBoxFor(model => model.CountViews, new { autocomplete = "off" })
+                </div>
+            </div>
+            <div class="item item-top m20">
+                <div class="caption">Image</div>
+                <div class="input">
+                    <div class="tools-buttons tools-icons">
+                        <div class="tools">
+                            <div class="tool" id="toolUpload">
+                                Upload
+                                <input type="file" id="photoUpload" class="upload-hidden" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media_" id="mediaList">
+                    </div>
+                    @Html.HiddenFor(model => model.Logo, new { id = "Logo" })
+                </div>
+            </div>
+            <div class="item m10">
+                <div class="caption"> </div>
+                <div class="input"><input type="submit" value="Add" /></div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        $('#photoUpload').on('change', function(e) {
+            var files = e.target.files;
+            if (files.length > 0) {
+                if (window.FormData !== undefined) {
+                    var data = new FormData();
+                    for (var x = 0; x < files.length; x++) {
+                        data.append("file" + x, files[x]);
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("UploadFile", "Files")?f=statistics',
+                        contentType: false,
+                        processData: false,
+                        data: data,
+                        success: function(result) {
+                            $('#Logo').val(result); // Set the value of the Logo field
+                            $('#mediaList').html('<img src="/images/statistics/' + result + '" />');
+                        },
+                        error: function(xhr, status, p3, p4) {
+                        }
+                    });
+                } else {
+                    alert("This browser doesn't support HTML5 file uploads!");
+                }
+            }
+        });
+
+        function successForm(data) {
+            if (data != -1) {
+                location.href = '?s=1';
+            } else {
+                $('#divValidationSummary li').remove();
+                $('#error').show();
+            }
+        }
+
+        function failForm(request, error) {
+        }
+    </script>
+}

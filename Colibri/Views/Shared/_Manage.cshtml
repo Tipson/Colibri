@@ -1,12 +1,10 @@
-﻿
-@{
+﻿@{
     string menu_style = "";
     if (ViewContext.RouteData.Values["controller"] == null)
     {
         menu_style = "display:none";
     }
 }
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,8 +26,9 @@
                     <a href="@Url.ActionLink(controller: "Manage", action: "Index")" class="a-menu">Portfolios</a>
                     <a href="@Url.ActionLink(controller: "Manage", action: "Products")" class="a-menu">Products</a>
                     <a href="@Url.ActionLink(controller: "Manage", action: "Reviews")" class="a-menu">Reviews</a>
-
-                </div>
+                    <a href="@Url.ActionLink(controller: "Manage", action: "Statistics")" class="a-menu">Statistics</a>
+                    <a href="@Url.ActionLink(controller: "Manage", action: "TeamMembers")" class="a-menu">Team Members</a>
+               </div>
             </div>
         </div>
         @RenderSection("underHead", required: false)

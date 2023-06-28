@@ -94,6 +94,8 @@
       <Folder Include="wwwroot\images\portfolios" />
       <Folder Include="wwwroot\images\products" />
       <Folder Include="wwwroot\images\reviews" />
+      <Folder Include="wwwroot\images\Statistics" />
+      <Folder Include="wwwroot\images\TeamMembers" />
     </ItemGroup>
 
 </Project>
