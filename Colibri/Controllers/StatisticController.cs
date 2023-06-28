@@ -36,7 +36,7 @@ public class StatisticController : ControllerBase
 
     [HttpPost("[action]")]
     public async Task<ActionResult> Create(
-        [FromQuery] CreateStatisticCommand command, CancellationToken token = default)
+        [FromForm] CreateStatisticCommand command, CancellationToken token = default)
     {
         await _statisticService.Create(command, token)
             .ConfigureAwait(false);
@@ -45,7 +45,7 @@ public class StatisticController : ControllerBase
 
     [HttpPost("[action]")]
     public async Task<ActionResult<Statistic>> Update(
-        [FromQuery] UpdateStatisticCommand command,
+        [FromForm] UpdateStatisticCommand command,
         CancellationToken token = default)
     {
         var result = await _statisticService.Update(command, token)
@@ -61,5 +61,14 @@ public class StatisticController : ControllerBase
         await _statisticService.Delete(command, token)
             .ConfigureAwait(false);
         return NoContent();
+    }
+    
+    [HttpPut("[action]")]
+    public async Task<ActionResult<Statistic>> UpdateVisibility(
+        [FromForm] UpdateVisibilityStatisticCommand command, CancellationToken token = default)
+    {
+        var result = await _statisticService.UpdateVisibility(command, token)
+            .ConfigureAwait(false);
+        return result;
     }
 }

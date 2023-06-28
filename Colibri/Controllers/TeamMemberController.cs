@@ -1,5 +1,7 @@
 ﻿using Colibri.Infrastructure;
+using Colibri.Models.Commands.Statistic;
 using Colibri.Models.Commands.TeamMember;
+using Colibri.Models.Statistics;
 using Colibri.Models.TeamMembers;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,7 +38,7 @@ public class TeamMemberController : ControllerBase
 
     [HttpPost("[action]")]
     public async Task<ActionResult> Create(
-        [FromQuery] CreateTeamMemberCommand command, CancellationToken token = default)
+        [FromForm] CreateTeamMemberCommand command, CancellationToken token = default)
     {
         await _teamMemberService.Create(command, token)
             .ConfigureAwait(false);
@@ -45,7 +47,7 @@ public class TeamMemberController : ControllerBase
 
     [HttpPost("[action]")]
     public async Task<ActionResult<TeamMember>> Update(
-        [FromQuery] UpdateTeamMemberCommand command,
+        [FromForm] UpdateTeamMemberCommand command,
         CancellationToken token = default)
     {
         var result = await _teamMemberService.Update(command, token)
@@ -61,5 +63,14 @@ public class TeamMemberController : ControllerBase
         await _teamMemberService.Delete(command, token)
             .ConfigureAwait(false);
         return NoContent();
+    }
+    
+    [HttpPut("[action]")]
+    public async Task<ActionResult<TeamMember>> UpdateVisibility(
+        [FromForm] UpdateVisibilityTeamMemberCommand command, CancellationToken token = default)
+    {
+        var result = await _teamMemberService.UpdateVisibility(command, token)
+            .ConfigureAwait(false);
+        return result;
     }
 }
