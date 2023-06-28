@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 @using SelectListItem = Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
 @using Colibri.Models.Portfolios
-@model Colibri.Models.Commands.Portfolio.CreatePortfolioCommand
+@model Colibri.Models.Commands.Product.CreateProductCommand
 
 @{
     ViewBag.Title = "Colibri Control Panel";
@@ -9,9 +9,7 @@
 
     List<SelectListItem> portfolioList = new List<SelectListItem>();
 
-
-    List<Portfolio>? portfolios = ViewBag.Portfolios;
-    
+    List<Portfolio>? portfolios = ViewBag.Products;
 
     Microsoft.Extensions.Primitives.StringValues queryVal;
     Context.Request.Query.TryGetValue("s", out queryVal);
@@ -20,7 +18,7 @@
 
 <div class="block-container-mid">
 
-    <form action="@Url.ActionLink(controller: "Portfolio", action: "Create")"
+    <form action="@Url.Action("Create", "Product")"
           data-ajax="true" data-ajax-method="POST"
           data-ajax-failure="failForm" data-ajax-success="successForm">
         <div class="_form" id="formAdd">
@@ -29,15 +27,27 @@
             <div id="divValidationSummary">@Html.ValidationSummary()</div>
             
             <div class="item">
-                <div class="caption"><label for="brandName">Brand Name</label></div>
+                <div class="caption"><label for="title">Title</label></div>
                 <div class="input">
-                    @Html.TextBoxFor(model => model.BrandName, new { autocomplete = "off" })
+                    @Html.TextBoxFor(model => model.Title, new { autocomplete = "off" })
                 </div>
             </div>
             <div class="item">
-                <div class="caption"><label for="description">Description</label></div>
+                <div class="caption"><label for="description1">Description1</label></div>
                 <div class="input">
-                    @Html.TextBoxFor(model => model.Description, new { autocomplete = "off" })
+                    @Html.TextBoxFor(model => model.Description1, new { autocomplete = "off" })
+                </div>
+            </div>
+            <div class="item">
+                <div class="caption"><label for="description2">Description2</label></div>
+                <div class="input">
+                    @Html.TextBoxFor(model => model.Description2, new { autocomplete = "off" })
+                </div>
+            </div>
+            <div class="item">
+                <div class="caption"><label for="price">Price</label></div>
+                <div class="input">
+                    @Html.TextBoxFor(model => model.Price, new { autocomplete = "off" })
                 </div>
             </div>
             <div class="item item-top m20">
@@ -53,12 +63,12 @@
                     </div>
                     <div class="media_" id="mediaList">
                     </div>
-                    @Html.HiddenFor(model => model.Image)
+                    @Html.HiddenFor(model => model.Logo, new { id = "Logo" })
                 </div>
             </div>
             <div class="item m10">
                 <div class="caption"> </div>
-                <div class="input"><input type="submit" value=Add></div>
+                <div class="input"><input type="submit" value="Add" /></div>
             </div>
             
         </div>
@@ -79,13 +89,13 @@
                     }
                     $.ajax({
                         type: "POST",
-                        url: '@Url.ActionLink(controller: "Files", action: "UploadFile" )?f=portfolios',
+                        url: '@Url.Action("UploadFile", "Files")?f=products',
                         contentType: false,
                         processData: false,
                         data: data,
                         success: function(result) {
-                            $('#Image').val(result);
-                            $('#mediaList').html('<img src="/images/portfolios/' + result + '"/>');
+                            $('#Logo').val(result); // Set the value of the Logo field
+                            $('#mediaList').html('<img src="/images/products/' + result + '" />');
                         },
                         error: function(xhr, status, p3, p4) {
                         }
@@ -95,15 +105,16 @@
                 }
             }
         });
+
         function successForm(data) {
             if (data != -1) {
-                location.href = '/addPortfolio?s=1'
-            }
-            else if (data == -1) {
+                location.href = '?s=1';
+            } else {
                 $('#divValidationSummary li').remove();
                 $('#error').show();
             }
         }
+
         function failForm(request, error) {
         }
     </script>

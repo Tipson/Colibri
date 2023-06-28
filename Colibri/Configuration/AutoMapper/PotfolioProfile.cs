@@ -5,9 +5,9 @@ using Colibri.Models.TeamMembers;
 
 namespace Colibri.Configuration.AutoMapper;
 
-public class PorfolioProfile : Profile
+public class PortfolioProfile : Profile
 {
-    public PorfolioProfile()
+    public PortfolioProfile()
     {
         CreateMap<PortfolioRow, Portfolio>();
     }

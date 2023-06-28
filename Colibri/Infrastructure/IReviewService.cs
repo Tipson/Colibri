@@ -10,4 +10,6 @@ public interface IReviewService
     Task<IEnumerable<Review>> GetAll(GetAllReviewCommand command, CancellationToken token);
     Task<Review> Update(UpdateReviewCommand command, CancellationToken token);
     Task Delete(DeleteReviewCommand command, CancellationToken token);
+    Task<Review> UpdateVisibility(UpdateVisibilityReviewCommand command, CancellationToken token);
+
 }

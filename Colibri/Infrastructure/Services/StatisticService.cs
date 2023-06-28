@@ -24,8 +24,9 @@ public class StatisticService : IStatisticService
             command.Description,
             command.Logo,
             command.CountFollowers,
-            command.CountViews
-            );
+            command.CountViews,
+            command.IsShow ? 1 : 0
+        );
 
         await _dbContext.Statistics
             .AddAsync(row, token)
@@ -99,5 +100,22 @@ public class StatisticService : IStatisticService
         await _dbContext
             .SaveChangesAsync(token)
             .ConfigureAwait(false);       
+    }
+    
+    public async Task<Statistic> UpdateVisibility(UpdateVisibilityStatisticCommand command, CancellationToken token)
+    {
+        var row = await _dbContext.Statistics
+            .SingleOrDefaultAsync(r => r.Id == command.Id, token)
+            .ConfigureAwait(false);
+        if (row is null)
+        {
+            throw new InvalidOperationException($"The Statistic with id = {command.Id} not found");
+        }
+        
+        row.IsShow = command.IsShow ? 1:0;
+        await _dbContext
+            .SaveChangesAsync(token)
+            .ConfigureAwait(false);
+        return _mapper.Map<Statistic>(row);
     }
 }

@@ -1,0 +1,192 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Colibri.Models.Reviews
+@model Colibri.Models.Commands.Review.UpdateReviewCommand
+
+@{
+    ViewBag.Title = "Colibri Control Panel";
+    Layout = "~/Views/Shared/_Manage.cshtml";
+    
+    List<Review>? reviews = ViewBag.Reviews;
+
+    
+    Microsoft.Extensions.Primitives.StringValues queryVal;
+    Context.Request.Query.TryGetValue("s", out queryVal);
+    string status_style = (queryVal.Count == 0) ? "display: none" : "";
+    
+    Review item = ViewBag.Item;
+    Console.WriteLine(item);
+}
+<div class="block-container-mid">
+
+    <form action="@Url.ActionLink(controller: "Review", action: "Update")"
+          data-ajax="true" method="POST" type="PUT" data-ajax-method="POST"
+          data-ajax-failure="failForm" data-ajax-success="successForm">
+        <div class="_form" id="formAdd">
+            <div id="success" class="success-item" style="@status_style">Successfully edited</div>
+            <div id="error" class="error" style="display:none;"></div>
+            <div id="divValidationSummary">@Html.ValidationSummary()</div>
+            @Html.HiddenFor(model => model.Id, new { Value = item.Id })
+            
+            <div class="item">
+                <div class="caption"><label for="name">Name</label></div>
+                <div class="input">
+                    @Html.TextBoxFor(model => model.Name, new { autocomplete = "off", value = item.Name })
+                </div>
+            </div>
+            <div class="item">
+                <div class="caption"><label for="position">Position</label></div>
+                <div class="input">
+                    @Html.TextBoxFor(model => model.Position, new { autocomplete = "off", value = item.Position })
+                </div>
+            </div>
+            <div class="item">
+                <div class="caption"><label for="companyName">CompanyName</label></div>
+                <div class="input">
+                    @Html.TextBoxFor(model => model.CompanyName, new { autocomplete = "off", value = item.CompanyName })
+                </div>
+            </div>
+            <div class="item">
+                <div class="caption"><label for="description">Description</label></div>
+                <div class="input">
+                    @Html.TextBoxFor(model => model.Description, new { autocomplete = "off", value = item.Description })
+                </div>
+            </div>
+            <div class="item item-top m20">
+                <div class="caption">Image</div>
+                <div class="input">
+                    <div class="tools-buttons tools-icons">
+                        <div class="tools">
+                            <div class="tool" id="toolUpload">
+                                Upload
+                                <input type="file" id="photoUpload" class="upload-hidden" />
+                            </div>
+                        </div>
+                    </div>
+            <div class="media_">
+                <div id="mediaList"></div>
+            </div>
+                    @Html.HiddenFor(model => model.Photo)
+                </div>
+            </div>
+                        
+            <div class="item item-top m20">
+                <div class="caption">Logo</div>
+                <div class="input">
+                    <div class="tools-buttons tools-icons">
+                        <div class="tools">
+                            <div class="tool" id="toolUploadLogo">
+                                Upload
+                                <input type="file" id="logoPhotoUpload" class="upload-hidden" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media_" id="logoMediaList">
+                    </div>
+                    @Html.HiddenFor(model => model.Logo)
+                </div>
+            </div>
+            
+            <div class="item m10">
+                <div class="caption"> </div>
+                <div class="input"><input type="submit" value=Save></div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        $('#Photo').change(function() {
+            var result = $('#Photo').val();
+            if (result.trim() !== '') {
+                var ret = '<img src="/images/reviews/' + result + '"/>';
+                $('#mediaList').html(ret);
+            }
+        });
+
+        $('#photoUpload').on('change', function(e) {
+            var files = e.target.files;
+            if (files.length > 0) {
+                if (window.FormData !== undefined) {
+                    var data = new FormData();
+                    for (var x = 0; x < files.length; x++) {
+                        data.append("file" + x, files[x]);
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.ActionLink(controller: "Files", action: "UploadFile")?f=reviews',
+                        contentType: false,
+                        processData: false,
+                        data: data,
+                        success: function(result) {
+                            $('#Photo').val(result);
+                            $('#Photo').change();
+                        },
+                        error: function(xhr, status, p3, p4) {
+                            // Обработка ошибки при загрузке файла
+                        }
+                    });
+                } else {
+                    alert("This browser doesn't support HTML5 file uploads!");
+                }
+            }
+        });
+        
+        $('#logoPhotoUpload').on('change', function(e) {
+            var files = e.target.files;
+            if (files.length > 0) {
+                if (window.FormData !== undefined) {
+                    var data = new FormData();
+                    for (var x = 0; x < files.length; x++) {
+                        data.append("file" + x, files[x]);
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.ActionLink(controller: "Files", action: "UploadFile")?f=reviews',
+                        contentType: false,
+                        processData: false,
+                        data: data,
+                        success: function(result) {
+                            $('#logoMediaList').html('<img src="/images/reviews/' + result + '"/>');
+                            $('#Logo').val(result);
+                        },
+                        error: function(xhr, status, p3, p4) {
+                            // Обработка ошибки при загрузке файла
+                        }
+                    });
+                } else {
+                    alert("This browser doesn't support HTML5 file uploads!");
+                }
+            }
+        });
+        
+                
+        function successForm(data) {
+            if (data != -1) {
+                location.href = '/editReview/@(item.Id)?s=1'
+            } else if (data == -1) {
+                $('#divValidationSummary li').remove();
+                $('#error').show();
+            }
+        }
+        
+        function failForm(request, error) {
+        }
+        
+        
+        $(document).ready(function() {
+            $('#Name').val('@item.Name');
+            $('#Position').val('@item.Position');
+            $('#CompanyName').val('@item.CompanyName');
+            $('#Description').val('@item.Description');
+
+            $('#Logo').val('@item.Logo');
+            $('#logoMediaList').html('<img src="/images/reviews/' + '@item.Logo' + '"/>');
+            
+            $('#Photo').val('@item.Photo');
+            $('#mediaList').html('<img src="/images/reviews/' + '@item.Photo' + '"/>');
+        })
+    </script>
+}

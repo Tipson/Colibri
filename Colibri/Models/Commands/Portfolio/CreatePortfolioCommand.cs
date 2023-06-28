@@ -3,5 +3,6 @@
 public record CreatePortfolioCommand(
     string BrandName,
     string Description,
+    bool IsShow,
     string Image
     );

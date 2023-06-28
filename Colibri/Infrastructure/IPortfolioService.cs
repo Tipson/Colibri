@@ -10,4 +10,5 @@ public interface IPortfolioService
     Task<IEnumerable<Portfolio>> GetAll(GetAllPortfolioCommand command, CancellationToken token);
     Task<Portfolio> Update(UpdatePortfolioCommand command, CancellationToken token);
     Task Delete(DeletePortfolioCommand command, CancellationToken token);
+    Task<Portfolio> UpdateVisibility(UpdateVisibilityPortfolioCommand command, CancellationToken token);
 }

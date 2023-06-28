@@ -1,5 +1,7 @@
 ﻿using Colibri.Infrastructure;
 using Colibri.Models.Commands.Portfolio;
+using Colibri.Models.Commands.Product;
+using Colibri.Models.Commands.Review;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,6 +34,18 @@ public class ManageController : Controller
         return View();
     }
     
+    public async Task<IActionResult> Products(CancellationToken token = default)
+    {
+        ViewBag.Items = await _productService.GetAll(new GetAllProductCommand(), token);
+        return View();
+    }
+    
+    public async Task<IActionResult> Reviews(CancellationToken token = default)
+    {
+        ViewBag.Items = await _reviewService.GetAll(new GetAllReviewCommand(), token);
+        return View();
+    }
+    
     [HttpGet]
     [Route("addPortfolio")]
     public ActionResult AddPortfolio()
@@ -43,7 +57,38 @@ public class ManageController : Controller
     [Route("editPortfolio/{id}")] 
     public async Task<ActionResult> EditPortfolio([FromRoute] int id, CancellationToken token = default)
     {
-        ViewBag.Item = await _portfolioService.Get(new GetPortfolioCommand(id), token);
+        var portfolio = await _portfolioService.Get(new GetPortfolioCommand(id), token);
+        ViewBag.Item = portfolio; // Исправлено на ViewBag.Item
+        return View();
+    }
+    
+    [HttpGet]
+    [Route("addProduct")]
+    public ActionResult AddProduct()
+    {
+        return View();
+    }
+    
+    [HttpGet]
+    [Route("editProduct/{id}")] 
+    public async Task<ActionResult> EditProduct([FromRoute] int id, CancellationToken token = default)
+    {
+        ViewBag.Item = await _productService.Get(new GetProductCommand(id), token);
+        return View();
+    }
+    
+    [HttpGet]
+    [Route("addReview")]
+    public ActionResult AddReview()
+    {
+        return View();
+    }
+    
+    [HttpGet]
+    [Route("editReview/{id}")] 
+    public async Task<ActionResult> EditReview([FromRoute] int id, CancellationToken token = default)
+    {
+        ViewBag.Item = await _reviewService.Get(new GetReviewCommand(id), token);
         return View();
     }
 }

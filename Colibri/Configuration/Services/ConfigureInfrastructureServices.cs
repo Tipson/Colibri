@@ -1,6 +1,5 @@
 ﻿using Colibri.Infrastructure;
 using Colibri.Infrastructure.Services;
-using Colibri.Models.Services;
 
 namespace Colibri.Configuration.Services;
 

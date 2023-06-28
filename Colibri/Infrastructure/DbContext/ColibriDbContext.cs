@@ -1,7 +1,6 @@
 ﻿using Colibri.Infrastructure.DbContext.Entities;
 using Colibri.Models.Portfolios;
 using Colibri.Models.Reviews;
-using Colibri.Models.Services;
 using Colibri.Models.Statistics;
 using Colibri.Models.TeamMembers;
 using Microsoft.EntityFrameworkCore;

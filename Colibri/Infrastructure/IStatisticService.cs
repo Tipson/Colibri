@@ -10,4 +10,6 @@ public interface IStatisticService
     Task<IEnumerable<Statistic>> GetAll(GetAllStatisticCommand command, CancellationToken token);
     Task<Statistic> Update(UpdateStatisticCommand command, CancellationToken token);
     Task Delete(DeleteStatisticCommand command, CancellationToken token);
+    Task<Statistic> UpdateVisibility(UpdateVisibilityStatisticCommand command, CancellationToken token);
+
 }

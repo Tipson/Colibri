@@ -10,4 +10,6 @@ public interface ITeamMemberService
     Task<IEnumerable<TeamMember>> GetAll(GetAllTeamMemberCommand command, CancellationToken token);
     Task<TeamMember> Update(UpdateTeamMemberCommand command, CancellationToken token);
     Task Delete(DeleteTeamMemberCommand command, CancellationToken token);
+    Task<TeamMember> UpdateVisibility(UpdateVisibilityTeamMemberCommand command, CancellationToken token);
+
 }

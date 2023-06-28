@@ -5,4 +5,5 @@ public record CreateStatisticCommand(
     string Description,
     string Logo,
     int CountFollowers,
-    int CountViews);
+    int CountViews,
+    bool IsShow);

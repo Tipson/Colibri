@@ -25,8 +25,9 @@ public class ReviewService : IReviewService
             command.Description,
             command.Position,
             command.Logo,
-            command.Photo
-            );
+            command.Photo,
+            command.IsShow ? 1 : 0
+        );
 
         await _dbContext.Reviews
             .AddAsync(row, token)
@@ -79,6 +80,7 @@ public class ReviewService : IReviewService
         row.Position = command.Position;
         row.Logo = command.Logo;
         row.Photo = command.Photo;
+        row.Description = command.Description;
         
         await _dbContext
             .SaveChangesAsync(token)
@@ -100,5 +102,22 @@ public class ReviewService : IReviewService
         await _dbContext
             .SaveChangesAsync(token)
             .ConfigureAwait(false);       
+    }
+
+    public async Task<Review> UpdateVisibility(UpdateVisibilityReviewCommand command, CancellationToken token)
+    {
+        var row = await _dbContext.Reviews
+            .SingleOrDefaultAsync(r => r.Id == command.Id, token)
+            .ConfigureAwait(false);
+        if (row is null)
+        {
+            throw new InvalidOperationException($"The Review with id = {command.Id} not found");
+        }
+        
+        row.IsShow = command.IsShow ? 1:0;
+        await _dbContext
+            .SaveChangesAsync(token)
+            .ConfigureAwait(false);
+        return _mapper.Map<Review>(row);
     }
 }

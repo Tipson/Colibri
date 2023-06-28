@@ -1,0 +1,34 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/pc.css",
+    "inputFile": "wwwroot/css/pc.less"
+  },
+  {
+    "outputFile": "wwwroot/css/pc-light.css",
+    "inputFile": "wwwroot/css/pc-light.less"
+  },
+  {
+    "outputFile": "wwwroot/css/mobile.css",
+    "inputFile": "wwwroot/css/mobile.less"
+  },
+  {
+    "outputFile": "wwwroot/css/manage.css",
+    "inputFile": "wwwroot/css/manage.less"
+  },
+  {
+    "outputFile": "wwwroot/css/glitch.css",
+    "inputFile": "wwwroot/css/glitch.less"
+  },
+  {
+    "outputFile": "wwwroot/css/glitch-text.css",
+    "inputFile": "wwwroot/css/glitch-text.less"
+  },
+  {
+    "outputFile": "wwwroot/css/glitch-image.css",
+    "inputFile": "wwwroot/css/glitch-image.less"
+  },
+  {
+    "outputFile": "wwwroot/css/glitch-text-test.css",
+    "inputFile": "wwwroot/css/glitch-text-test.less"
+  }
+]

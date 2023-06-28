@@ -36,7 +36,7 @@ public class HomeController : Controller
     {
         ViewBag.TeamMembers = await _teamMemberService.GetAll(new GetAllTeamMemberCommand(), token);
         ViewBag.Statistics = await _statisticService.GetAll(new GetAllStatisticCommand(), token);
-        ViewBag.Porfolios = await _portfolioService.GetAll(new GetAllPortfolioCommand(), token);
+        ViewBag.Portfolios = await _portfolioService.GetAll(new GetAllPortfolioCommand(), token);
         ViewBag.Favorites = await _reviewService.GetAll(new GetAllReviewCommand(), token);
         ViewBag.Topics = await _productService.GetAll(new GetAllProductCommand(), token);    
         

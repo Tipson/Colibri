@@ -1,4 +1,4 @@
-﻿namespace Colibri.Models.Services;
+﻿namespace Colibri.Models.Products;
 
 public class Product
 {
@@ -8,4 +8,6 @@ public class Product
     public string Description2 { get; set; }
     public int Price { get; set; }
     public string Logo { get; set; }
+    public int IsShow { get; set; }
+ 
 }

@@ -8,19 +8,23 @@ public class ProductRow
     public string Description2 { get; set; }
     public int Price { get; set; }
     public string Logo { get; set; }
+    public int IsShow { get; set; }
+
 
     public ProductRow(
         string title,
         string description1,
         string description2,
         int price,
-        string logo)
+        string logo,
+        int isShow)
     {
         Title = title;
         Description1 = description1;
         Description2 = description2;
         Price = price;
         Logo = logo;
+        IsShow = isShow;
     }
 
     public ProductRow()

@@ -5,4 +5,5 @@ public record CreateTeamMemberCommand(
     string Position,
     string Photo,
     string Twitter,
-    string Linkedin);
+    string Linkedin,
+    bool IsShow);

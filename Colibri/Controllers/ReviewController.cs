@@ -35,7 +35,7 @@ public class ReviewController : ControllerBase
 
     [HttpPost("[action]")]
     public async Task<ActionResult> Create(
-        [FromQuery] CreateReviewCommand command, CancellationToken token = default)
+        [FromForm] CreateReviewCommand command, CancellationToken token = default)
     {
         await _reviewService.Create(command, token)
             .ConfigureAwait(false);
@@ -44,7 +44,7 @@ public class ReviewController : ControllerBase
 
     [HttpPost("[action]")]
     public async Task<ActionResult<Review>> Update(
-        [FromQuery] UpdateReviewCommand command,
+        [FromForm] UpdateReviewCommand command,
         CancellationToken token = default)
     {
         var result = await _reviewService.Update(command, token)
@@ -60,5 +60,14 @@ public class ReviewController : ControllerBase
         await _reviewService.Delete(command, token)
             .ConfigureAwait(false);
         return NoContent();
+    }
+    
+    [HttpPut("[action]")]
+    public async Task<ActionResult<Review>> UpdateVisibility(
+        [FromForm] UpdateVisibilityReviewCommand command, CancellationToken token = default)
+    {
+        var result = await _reviewService.UpdateVisibility(command, token)
+            .ConfigureAwait(false);
+        return result;
     }
 }

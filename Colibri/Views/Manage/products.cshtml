@@ -3,12 +3,12 @@
 @{
     ViewBag.Title = "Colibri Control Panel";
     Layout = "~/Views/Shared/_Manage.cshtml";
-    Dictionary<string, dynamic> tableElem = Colibri.Utils.Select.GetPortfoliosTable(Localizer);
+    Dictionary<string, dynamic> tableElem = Colibri.Utils.Select.GetProductsTable(Localizer);
 }
 
 <div class="block-content">
 
-    <a href="@Url.ActionLink(action: "addPortfolio", controller: "Manage")" class="add-button">add</a>
+    <a href="@Url.ActionLink(action: "addProduct", controller: "Manage")" class="add-button">add</a>
 
     @Html.Partial("/views/_shared/_table.cshtml", tableElem)
 </div>
@@ -25,7 +25,7 @@
             console.log(cur_value);
             console.log(Number(cur_value));
                 $.ajax({
-                  url: '@Url.ActionLink(controller: "Portfolio", action: "UpdateVisibility")',
+                  url: '@Url.ActionLink(controller: "Product", action: "UpdateVisibility")',
                   type: 'PUT',
                   data: "id=" + id + "&isShow=" + (Number(cur_value) === 0),
                   success: function() {

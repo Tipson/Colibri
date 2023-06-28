@@ -25,7 +25,7 @@ public class FilesController : ControllerBase
     }
     // GET
 
-    /*[HttpPost("[action]")]
+    [HttpPost("[action]")]
     public async Task<ActionResult> UploadFile([FromQuery] string f, CancellationToken token = default)
     {
         string ret = "";
@@ -50,7 +50,7 @@ public class FilesController : ControllerBase
                     {
                         SixLabors.ImageSharp.Formats.ImageEncoder encoder;
 
-                        if ((image.Width > 300 || image.Height > 300) && f == "partners")
+                        if ((image.Width > 300 || image.Height > 300) && f == "products")
                         {
                             var resizeOptions = new ResizeOptions
                             {
@@ -60,7 +60,7 @@ public class FilesController : ControllerBase
                             image.Mutate(x => x.Resize(resizeOptions));
                         }
 
-                        if ((image.Width > 1200 || image.Height > 1200) && f == "sponsorPacks")
+                        if ((image.Width > 1200 || image.Height > 1200) && f == "portfolios")
                         {
                             var resizeOptions = new ResizeOptions
                             {
@@ -78,7 +78,7 @@ public class FilesController : ControllerBase
 
                         }
 
-                        if (f == "sponsorPacks")
+                        if (f == "portfolios")
                         {
                             encoder = new JpegEncoder { Quality = 80 };
                             fileName += ".jpg";
@@ -97,7 +97,7 @@ public class FilesController : ControllerBase
                             await image.SaveAsync(fileStream, encoder, token);
                         }
 
-                        if (f == "sponsorPacks")
+                        if (f == "portfolios")
                         {
                             await using (var fileStream = new FileStream(pathTempMini, FileMode.Create))
                             {
@@ -122,5 +122,5 @@ public class FilesController : ControllerBase
             return Ok("Upload failed");
         }
         return Ok(ret);
-    }*/
+    }
 }

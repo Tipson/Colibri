@@ -5,4 +5,5 @@ public record CreateReviewCommand(string Name,
     string Description,
     string Position,
     string Logo,
-    string Photo);
+    string Photo,
+    bool IsShow);

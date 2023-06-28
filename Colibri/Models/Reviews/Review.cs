@@ -9,4 +9,6 @@ public class Review
     public string Position { get; set; }
     public string Logo { get; set; }
     public string Photo { get; set; }
+    public int IsShow { get; set; }
+
 }

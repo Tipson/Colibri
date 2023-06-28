@@ -36,7 +36,7 @@ public class PortfolioController : ControllerBase
 
     [HttpPost("[action]")]
     public async Task<ActionResult> Create(
-        [FromQuery] CreatePortfolioCommand command, CancellationToken token = default)
+        [FromForm] CreatePortfolioCommand command, CancellationToken token = default)
     {
         await _portfolioService.Create(command, token)
             .ConfigureAwait(false);
@@ -45,7 +45,7 @@ public class PortfolioController : ControllerBase
 
     [HttpPost("[action]")]
     public async Task<ActionResult<Portfolio>> Update(
-        [FromQuery] UpdatePortfolioCommand command,
+        [FromForm] UpdatePortfolioCommand command,
         CancellationToken token = default)
     {
         var result = await _portfolioService.Update(command, token)
@@ -61,5 +61,14 @@ public class PortfolioController : ControllerBase
         await _portfolioService.Delete(command, token)
             .ConfigureAwait(false);
         return NoContent();
+    }
+    
+    [HttpPut("[action]")]
+    public async Task<ActionResult<Portfolio>> UpdateVisibility(
+        [FromForm] UpdateVisibilityPortfolioCommand command, CancellationToken token = default)
+    {
+        var result = await _portfolioService.UpdateVisibility(command, token)
+            .ConfigureAwait(false);
+        return result;
     }
 }

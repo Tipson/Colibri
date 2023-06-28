@@ -8,4 +8,5 @@ public class Statistic
     public string Logo { get; set; }
     public int CountViews { get; set; }
     public int CountFollowers { get; set; }
+    public int IsShow { get; set; }
 }

@@ -8,4 +8,6 @@ public class TeamMember
     public string Photo { get; set; }
     public string Twitter { get; set; }
     public string Linkedin { get; set; }
+    public int IsShow { get; set; }
+
 }

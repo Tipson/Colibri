@@ -11,7 +11,7 @@ public static class ConfigureAutoMapper
         {
             mc.AddProfile(new TeamMemberProfile());
             mc.AddProfile(new ErrorProfile());
-            mc.AddProfile(new PorfolioProfile());
+            mc.AddProfile(new PortfolioProfile());
             mc.AddProfile(new ProductProfile());
             mc.AddProfile(new ReviewProfile());
             mc.AddProfile(new StatisticProfile());

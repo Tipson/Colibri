@@ -25,7 +25,8 @@ public class TeamMemberService : ITeamMemberService
             command.Position,
             command.Photo,
             command.Twitter,
-            command.Linkedin
+            command.Linkedin,
+            command.IsShow ? 1 : 0
         );
 
         await _dbContext.TeamMembers
@@ -101,5 +102,22 @@ public class TeamMemberService : ITeamMemberService
         await _dbContext
             .SaveChangesAsync(token)
             .ConfigureAwait(false);        
+    }
+    
+    public async Task<TeamMember> UpdateVisibility(UpdateVisibilityTeamMemberCommand command, CancellationToken token)
+    {
+        var row = await _dbContext.TeamMembers
+            .SingleOrDefaultAsync(r => r.Id == command.Id, token)
+            .ConfigureAwait(false);
+        if (row is null)
+        {
+            throw new InvalidOperationException($"The TeamMember with id = {command.Id} not found");
+        }
+        
+        row.IsShow = command.IsShow ? 1:0;
+        await _dbContext
+            .SaveChangesAsync(token)
+            .ConfigureAwait(false);
+        return _mapper.Map<TeamMember>(row);
     }
 }

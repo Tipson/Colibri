@@ -90,4 +90,10 @@
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\LICENSE.txt" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="wwwroot\images\portfolios" />
+      <Folder Include="wwwroot\images\products" />
+      <Folder Include="wwwroot\images\reviews" />
+    </ItemGroup>
+
 </Project>

@@ -3,7 +3,7 @@ using Colibri.Infrastructure.DbContext;
 using Colibri.Infrastructure.DbContext.Entities;
 using Colibri.Models.Commands.Portfolio;
 using Colibri.Models.Commands.Product;
-using Colibri.Models.Services;
+using Colibri.Models.Products;
 using Microsoft.EntityFrameworkCore;
 
 namespace Colibri.Infrastructure.Services;
@@ -25,7 +25,8 @@ public class ProductService : IProductService
             command.Description1,
             command.Description2,
             command.Price,
-            command.Logo
+            command.Logo,
+            command.IsShow ? 1 : 0
         );
 
         await _dbContext.Products
@@ -100,5 +101,22 @@ public class ProductService : IProductService
         await _dbContext
             .SaveChangesAsync(token)
             .ConfigureAwait(false);       
+    }
+    
+    public async Task<Product> UpdateVisibility(UpdateVisibilityProductCommand command, CancellationToken token)
+    {
+        var row = await _dbContext.Products
+            .SingleOrDefaultAsync(r => r.Id == command.Id, token)
+            .ConfigureAwait(false);
+        if (row is null)
+        {
+            throw new InvalidOperationException($"The Product with id = {command.Id} not found");
+        }
+        
+        row.IsShow = command.IsShow ? 1:0;
+        await _dbContext
+            .SaveChangesAsync(token)
+            .ConfigureAwait(false);
+        return _mapper.Map<Product>(row);
     }
 }

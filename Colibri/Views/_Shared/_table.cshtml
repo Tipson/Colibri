@@ -3,7 +3,7 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @model Dictionary<string, dynamic>
 @{
-    Synopsis.Models.TableColumn[] columns = Model["Columns"];
+    TableColumn[] columns = Model["Columns"];
     string listPath = Model["List"];
     int pageSize = (Model["PageSize"] != null) ? Model["PageSize"] : 60;
     string tableClass = (Model["TableClass"] != null) ? Model["TableClass"] : "";

@@ -1,6 +1,4 @@
-﻿@using Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer;
-
+﻿
 @{
     string menu_style = "";
     if (ViewContext.RouteData.Values["controller"] == null)
@@ -27,12 +25,9 @@
                     <div class="cc">Colibri</div>
                 </a>
                 <div class="nav" style="@menu_style">
-                    <a href="@Url.ActionLink(controller: "Manage", action: "Index")" class="a-menu">@Localizer["Speakers"]</a>
-                    <a href="@Url.ActionLink(controller: "Manage", action: "Partners")" class="a-menu">@Localizer["Partners"]</a>
-                    <a href="@Url.ActionLink(controller: "Manage", action: "SponsorPacks")" class="a-menu">@Localizer["SponsorPack"]</a>
-@*                    <a href="@Url.ActionLink(controller: "Manage", action: "Agendas")" class="a-menu">@Localizer["Agendas"]</a>*@
-                    <a href="@Url.ActionLink(controller: "Manage", action: "Locations")" class="a-menu">@Localizer["Locations"]</a>
-
+                    <a href="@Url.ActionLink(controller: "Manage", action: "Index")" class="a-menu">Portfolios</a>
+                    <a href="@Url.ActionLink(controller: "Manage", action: "Products")" class="a-menu">Products</a>
+                    <a href="@Url.ActionLink(controller: "Manage", action: "Reviews")" class="a-menu">Reviews</a>
 
                 </div>
             </div>

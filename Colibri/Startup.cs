@@ -68,10 +68,10 @@ public class Startup
             app.UseDeveloperExceptionPage();
 
             using var scope = serviceProvider.CreateScope();
-            var synopsisDbContext = scope.ServiceProvider.GetRequiredService<ColibriDbContext>();
-            synopsisDbContext.Database.Migrate();
-            var synopsisAuthDbContext = scope.ServiceProvider.GetRequiredService<ColibriAuthContext>();
-            synopsisAuthDbContext.Database.Migrate();
+            var colibriDbContext = scope.ServiceProvider.GetRequiredService<ColibriDbContext>();
+            colibriDbContext.Database.Migrate();
+            var colibriAuthDbContext = scope.ServiceProvider.GetRequiredService<ColibriAuthContext>();
+            colibriAuthDbContext.Database.Migrate();
         }
         
         app.UseHttpsRedirection();

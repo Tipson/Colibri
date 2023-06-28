@@ -1,4 +1,4 @@
-﻿namespace Synopsis.Models
+﻿namespace Colibri.Models
 {
     public class TableColumn
     {

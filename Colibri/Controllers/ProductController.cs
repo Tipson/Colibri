@@ -1,6 +1,6 @@
 ﻿using Colibri.Infrastructure;
 using Colibri.Models.Commands.Product;
-using Colibri.Models.Services;
+using Colibri.Models.Products;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Colibri.Controllers;
@@ -36,7 +36,7 @@ public class ProductController : ControllerBase
 
     [HttpPost("[action]")]
     public async Task<ActionResult> Create(
-        [FromQuery] CreateProductCommand command, CancellationToken token = default)
+        [FromForm] CreateProductCommand command, CancellationToken token = default)
     {
         await _productService.Create(command, token)
             .ConfigureAwait(false);
@@ -45,7 +45,7 @@ public class ProductController : ControllerBase
 
     [HttpPost("[action]")]
     public async Task<ActionResult<Product>> Update(
-        [FromQuery] UpdateProductCommand command,
+        [FromForm] UpdateProductCommand command,
         CancellationToken token = default)
     {
         var result = await _productService.Update(command, token)
@@ -61,5 +61,14 @@ public class ProductController : ControllerBase
         await _productService.Delete(command, token)
             .ConfigureAwait(false);
         return NoContent();
+    }
+    
+    [HttpPut("[action]")]
+    public async Task<ActionResult<Product>> UpdateVisibility(
+        [FromForm] UpdateVisibilityProductCommand command, CancellationToken token = default)
+    {
+        var result = await _productService.UpdateVisibility(command, token)
+            .ConfigureAwait(false);
+        return result;
     }
 }

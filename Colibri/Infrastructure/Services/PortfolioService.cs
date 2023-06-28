@@ -23,6 +23,7 @@ public class PortfolioService : IPortfolioService
         var row = new PortfolioRow(
             command.BrandName,
             command.Description,
+            command.IsShow ? 1 : 0,
             command.Image
         );
 
@@ -96,5 +97,22 @@ public class PortfolioService : IPortfolioService
         await _dbContext
             .SaveChangesAsync(token)
             .ConfigureAwait(false);       
+    }
+
+    public async Task<Portfolio> UpdateVisibility(UpdateVisibilityPortfolioCommand command, CancellationToken token)
+    {
+        var row = await _dbContext.Portfolios
+            .SingleOrDefaultAsync(r => r.Id == command.Id, token)
+            .ConfigureAwait(false);
+        if (row is null)
+        {
+            throw new InvalidOperationException($"The Portfolio with id = {command.Id} not found");
+        }
+        
+        row.IsShow = command.IsShow ? 1:0;
+        await _dbContext
+            .SaveChangesAsync(token)
+            .ConfigureAwait(false);
+        return _mapper.Map<Portfolio>(row);
     }
 }

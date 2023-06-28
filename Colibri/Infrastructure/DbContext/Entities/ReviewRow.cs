@@ -9,6 +9,8 @@ public class ReviewRow
     public string Position { get; set; }
     public string Logo { get; set; }
     public string Photo { get; set; }
+    public int IsShow { get; set; }
+
 
     public ReviewRow(
         string name,
@@ -16,7 +18,8 @@ public class ReviewRow
         string description,
         string position,
         string logo,
-        string photo)
+        string photo,
+        int isShow)
     {
         Name = name;
         CompanyName = companyName;
@@ -24,6 +27,7 @@ public class ReviewRow
         Position = position;
         Logo = logo;
         Photo = photo;
+        IsShow = isShow;
     }
     
     public ReviewRow()

@@ -5,4 +5,5 @@ public record CreateProductCommand(
     string Description1,
     string Description2,
     int Price,
-    string Logo);
+    string Logo,
+    bool IsShow);
