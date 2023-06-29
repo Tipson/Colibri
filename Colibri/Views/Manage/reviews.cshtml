@@ -19,30 +19,31 @@
         var t_restore = 'Restore';
     
         function updateEvent(id) {
-            event.stopPropagation();
-            console.log($('#status' + id).val());
-            var cur_value = $('#status' + id).val();
-            console.log(cur_value);
-            console.log(Number(cur_value));
-                $.ajax({
-                  url: '@Url.ActionLink(controller: "Review", action: "UpdateVisibility")',
-                  type: 'PUT',
-                  data: "id=" + id + "&isShow=" + (Number(cur_value) === 0),
-                  success: function() {
-                      if (Number(cur_value) === 0){
-                    $('#status' + id).attr("value", 1);
-                    $('#item' + id).removeClass('tr-red');
-                    $('#delete' + id).html(t_delete);
-                    } else if(Number(cur_value) === 1) {
-                       $('#status' + id).attr("value", 0);
-                       $('#item' + id).addClass('tr-red');
-                       $('#delete' + id).html(t_restore);
-                    }
-                  },
-                  error: function (XMLHttpRequest, textStatus, errorThrown) {
-                      alert("Status: " + textStatus); alert("Error: " + errorThrown); 
-                  }
-                  });
-        }
+                    event.stopPropagation();
+                    console.log($('#status' + id).text());
+                    var cur_value = $('#status' + id).text();
+                    console.log(cur_value);
+                    console.log(Number(cur_value));
+                    $.ajax({
+                        url: '@Url.ActionLink(controller: "Review", action: "UpdateVisibility")',
+                        type: 'PUT',
+                        data: "id=" + id + "&isShow=" + (Number(cur_value) === 0),
+                        success: function() {
+                            if (Number(cur_value) === 0) {
+                                $('#status' + id).text(1);
+                                $('#item' + id).removeClass('tr-red');
+                                $('#delete' + id).html(t_delete);
+                            } else if (Number(cur_value) === 1) {
+                                $('#status' + id).text(0);
+                                $('#item' + id).addClass('tr-red');
+                                $('#delete' + id).html(t_restore);
+                            }
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            alert("Status: " + textStatus);
+                            alert("Error: " + errorThrown);
+                        }
+                    });
+                }
     </script>
 }
