@@ -1,8 +1,7 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
-}
+    List<Colibri.Models.Partners.Partner>? partnersPartnersList = ViewBag.Partners.Partners;
+    List<Colibri.Models.Partners.Partner>? mediaPartnersList = ViewBag.Partners.MediaPartners;
+    List<Colibri.Models.Reviews.Review>? reviewsList = ViewBag.Reviews;
+    List<Colibri.Models.TeamMembers.TeamMember>? teamMembersList = ViewBag.TeamMembers;
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+}

@@ -1,6 +1,4 @@
-﻿using Synopsis.Models.Partners;
-
-namespace Colibri.Models.Partners;
+﻿namespace Colibri.Models.Partners;
 
 public class PartnersGroupedCollection
 {

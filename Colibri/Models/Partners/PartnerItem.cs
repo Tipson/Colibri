@@ -1,7 +1,4 @@
-using Colibri.Models;
-using Colibri.Models.Partners;
-
-namespace Synopsis.Models.Partners;
+namespace Colibri.Models.Partners;
 
 public class PartnerItem
 {

@@ -113,20 +113,19 @@ public class PartnersService : IPartnersService
     public async Task<PartnersGroupedCollection> GetGrouped(GetGroupedPartnerCommand command, CancellationToken token)
     {
         var rows = await _dbContext.Partners
-            .Where(r => r.Id == 1 )
+            .Where(r => r.IsShow == 1 )
             .AsNoTracking()
             .OrderByDescending(r => r.Important)
             .ToListAsync(token);
 
         var models = _mapper.Map<List<Partner>>(rows);
 
-        var sponsorPacksGroupByType = models.GroupBy(m => m.Type).ToList();
+        var partnersGroupByType = models.GroupBy(m => m.Type).ToList();
 
         return new PartnersGroupedCollection
         {
-            MediaPartners = sponsorPacksGroupByType.SingleOrDefault(p => p.Key == PartnerType.MediaPartners)?.ToList(),
-            Partners = sponsorPacksGroupByType.SingleOrDefault(p => p.Key == PartnerType.Partners)?.ToList(),
-
+            MediaPartners = partnersGroupByType.SingleOrDefault(p => p.Key == PartnerType.MediaPartners)?.ToList(),
+            Partners = partnersGroupByType.SingleOrDefault(p => p.Key == PartnerType.Partners)?.ToList(),
         };
     }
 
