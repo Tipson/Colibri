@@ -37,6 +37,21 @@ public class Select
          return tableElem;
     }
      
+     public static Dictionary<string, dynamic> GetPartnersTable(IViewLocalizer viewLocalizer, string listPath = "_partnerList")
+     {
+         Dictionary<string, dynamic> tableElem = new Dictionary<string, dynamic>();
+         TableColumn[] columns = new TableColumn[] {
+             new TableColumn { caption= viewLocalizer["Name"].Value, id = "name", sort_by = "p_name", procent=50},
+             new TableColumn { caption= viewLocalizer["Type"].Value, id = "type", sort_by = "p_type", procent=25},
+             new TableColumn { caption= "", id = "", sort_by = "", procent=25},
+         };
+         tableElem["Columns"] = columns;
+         tableElem["List"] = listPath;
+         tableElem["PageSize"] = 3000;
+         tableElem["TableClass"] = "";
+         return tableElem;
+     }
+     
      public static Dictionary<string, dynamic> GetReviewsTable(IViewLocalizer viewLocalizer, string listPath = "_reviewList")
      {
          Dictionary<string, dynamic> tableElem = new Dictionary<string, dynamic>();

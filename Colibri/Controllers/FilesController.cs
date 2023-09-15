@@ -59,6 +59,16 @@ public class FilesController : ControllerBase
                             };
                             image.Mutate(x => x.Resize(resizeOptions));
                         }
+                        
+                        if ((image.Width > 300 || image.Height > 300) && f == "partners")
+                        {
+                            var resizeOptions = new ResizeOptions
+                            {
+                                Size = new Size(300, 300),
+                                Mode = ResizeMode.Max
+                            };
+                            image.Mutate(x => x.Resize(resizeOptions));
+                        }
 
                         if ((image.Width > 1200 || image.Height > 1200) && f == "portfolios")
                         {

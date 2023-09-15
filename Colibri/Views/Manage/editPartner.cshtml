@@ -1,0 +1,251 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using SelectListItem = Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+@model Colibri.Models.Commands.Partners.UpdatePartnerCommand
+@inject IViewLocalizer Localizer
+@{
+    ViewBag.Title = "Synopsis Control Panel";
+    Layout = "~/Views/Shared/_Manage.cshtml";
+
+    List<SelectListItem> typeList = new List<SelectListItem>();
+    List<SelectListItem> impList = new List<SelectListItem>();
+
+    typeList.Add(new SelectListItem() { Text = "Partners", Value = "0" });
+    typeList.Add(new SelectListItem() { Text = "Media Partner", Value = "1" });
+
+    for (int i = 0; i <= 10; ++i)
+    {
+        impList.Add(new SelectListItem() { Text = i.ToString(""), Value = i.ToString("") });
+    }
+    Colibri.Models.Partners.Partner item = ViewBag.Item;
+
+    Microsoft.Extensions.Primitives.StringValues queryVal;
+    Context.Request.Query.TryGetValue("s", out queryVal);
+    string status_style = (queryVal.Count == 0) ? "display: none" : "";
+}
+
+<div class="block-container-mid">
+
+    <form action="@Url.ActionLink(controller: "Partners", action: "Update")"
+          data-ajax="true" method="POST" type="PUT" data-ajax-method="POST"
+          data-ajax-failure="failForm" data-ajax-success="successForm">
+        <div class="_form" id="formAdd">
+            <div id="success" class="success-item" style="@status_style">Successfully edited</div>
+            <div id="error" class="error" style="display:none;"></div>
+            <div id="divValidationSummary">@Html.ValidationSummary()</div>
+            <div class="item">
+                <div class="caption"><label for="name">@Localizer["Name"]</label></div>
+                <div class="input">
+                    @Html.TextBoxFor(model => model.Name, new { autocomplete = "off", @Value = item.Name })
+                </div>
+            </div>
+            <div class="item">
+                <div class="caption"><label for="url">URL</label></div>
+                <div class="input">
+                    @Html.TextBoxFor(model => model.Url, new { autocomplete = "off", @Value = item.Url })
+                </div>
+            </div>
+
+            <div class="item item-top m20">
+                <div class="caption">@Localizer["Logo"]</div>
+                <div class="input">
+                    <div class="tools-buttons tools-icons">
+                        <div class="tools">
+                            <div class="tool" id="toolUpload">
+                                @Localizer["Upload"]
+                                <input type="file" id="logoUpload" class="upload-hidden" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media_" id="mediaList">
+                    </div>
+                    @Html.HiddenFor(model => model.Logo, new { Value = item.Logo })
+                    @Html.HiddenFor(model => model.Id, new { Value = item.Id })
+                </div>
+            </div>
+
+            <div class="item m20">
+                <div class="caption"><label for="type">@Localizer["Type"]</label></div>
+                <div class="input">
+                    <div class="input-drop">
+                        @Html.DropDownListFor(model => model.Type, typeList)
+                    </div>
+                </div>
+            </div>
+
+            <div class="item m20">
+                <div class="caption">
+                    <label for="important">
+                        @Localizer["Importance"]
+                    </label>
+                </div>
+                <div class="input">
+                    <div class="input-drop">
+                        @Html.DropDownListFor(model => model.Importance, impList)
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="caption"><label for="TelegramUrl">Telegram</label></div>
+                <div class="input">
+                    @Html.TextBoxFor(model => model.Telegram, new { autocomplete = "off", value = item.Telegram })
+                </div>
+            </div>
+            <div class="item">
+                <div class="caption"><label for="LinkedinUrl">Linkedin</label></div>
+                <div class="input">
+                    @Html.TextBoxFor(model => model.Linkedin, new { autocomplete = "off", value = item.Linkedin })
+                </div>
+            </div>
+            <div class="item">
+                <div class="caption"><label for="TwitterUrl">Twitter</label></div>
+                <div class="input">
+                    @Html.TextBoxFor(model => model.Twitter, new { autocomplete = "off", value = item.Twitter })
+                </div>
+            </div>
+            <div class="item">
+                <div class="caption"><label for="MediumUrl">Medium</label></div>
+                <div class="input">
+                    @Html.TextBoxFor(model => model.Medium, new { autocomplete = "off", value = item.Medium })
+                </div>
+            </div>
+            <div class="item">
+                <div class="caption"><label for="FacebookUrl">Facebook</label></div>
+                <div class="input">
+                    @Html.TextBoxFor(model => model.Facebook, new { autocomplete = "off", value = item.Facebook })
+                </div>
+            </div>
+            <div class="item">
+                <div class="caption"><label for="InstagramUrl">Instagram</label></div>
+                <div class="input">
+                    @Html.TextBoxFor(model => model.Instagram, new { autocomplete = "off", value = item.Instagram })
+                </div>
+            </div>
+            <div class="item">
+                <div class="caption"><label for="YoutubeUrl">Youtube</label></div>
+                <div class="input">
+                    @Html.TextBoxFor(model => model.Youtube, new { autocomplete = "off", value = item.Youtube })
+                </div>
+            </div>
+
+            <div class="item m10">
+                <div class="caption"> </div>
+                <div class="input"><input type="submit" value=@Localizer["Save"] /></div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        $('#Logo').change(function() {
+            var result = $('#Logo').val();
+            if (result.trim() != '') {
+                var ret = '<img src="/images/partners/' + result + '"/>';
+                $('#mediaList').html(ret);
+            }
+        })
+
+        $('#logoUpload').on('change', function(e) {
+            var files = e.target.files;
+            if (files.length > 0) {
+                if (window.FormData !== undefined) {
+
+                    var data = new FormData();
+                    for (var x = 0; x < files.length; x++) {
+                        data.append("file" + x, files[x]);
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.ActionLink(controller: "Files", action: "UploadFile" )?f=partners',
+                        contentType: false,
+                        processData: false,
+                        data: data,
+                        success: function(result) {
+                            $('#Logo').val(result);
+                            $('#Logo').change();
+                        },
+                        error: function(xhr, status, p3, p4) {
+                        }
+                    });
+                } else {
+                    alert("This browser doesn't support HTML5 file uploads!");
+                }
+
+            }
+        });
+
+        $('#shortLogoUpload').on('change', function(e) {
+            var files = e.target.files;
+            if (files.length > 0) {
+                if (window.FormData !== undefined) {
+
+                    var data = new FormData();
+                    for (var x = 0; x < files.length; x++) {
+                        data.append("file" + x, files[x]);
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.ActionLink(controller: "Files", action: "UploadFile" )?f=partners',
+                        contentType: false,
+                        processData: false,
+                        data: data,
+                        success: function(result) {
+                            $('#ShortLogo').val(result);
+                            $('#shortMediaList').html('<img src="/images/partners/' + result + '"/>');
+                        },
+                        error: function(xhr, status, p3, p4) {
+                        }
+                    });
+                } else {
+                    alert("This browser doesn't support HTML5 file uploads!");
+                }
+            }
+        });
+
+
+        function successForm(data) {
+            if (data != -1) {
+                location.href = '/manage/editPartner/@item.Id?s=1'
+            }
+            else if (data == -1) {
+                $('#divValidationSummary li').remove();
+                $('#error').show();
+            }
+        }
+
+
+        function failForm(request, error) {
+
+        }
+        $(document).ready(function() {
+            $('#Name').val('@item.Name');
+            $('#Url').val('@item.Url');
+            $('#Telegram').val('@item.Telegram');
+            $('#Linkedin').val('@item.Linkedin');
+            $('#Twitter').val('@item.Twitter');
+            $('#Medium').val('@item.Medium');
+            $('#Facebook').val('@item.Facebook');
+            $('#Instagram').val('@item.Instagram');
+            $('#Youtube').val('@item.Youtube');
+            $('#Logo').val('@item.Logo');
+            $('#Logo').change();
+
+            $('#Type').val('@((int)item.Type)');
+            $('#Type').change();
+
+ 
+            @*
+            $('#SynopsisType').val('@(item.SynopsisType)');
+            $('#SynopsisType').change();*@
+
+            $('#Importance').val('@((int)item.Important)');
+            $('#Importance').change();
+        })
+
+    </script>
+}

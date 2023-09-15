@@ -15,6 +15,7 @@ public static class ConfigureAutoMapper
             mc.AddProfile(new ProductProfile());
             mc.AddProfile(new ReviewProfile());
             mc.AddProfile(new StatisticProfile());
+            mc.AddProfile(new PartnerProfile());
         });
 
         var mapper = mapperConfig.CreateMapper();

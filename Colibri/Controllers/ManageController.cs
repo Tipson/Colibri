@@ -1,4 +1,5 @@
 ﻿using Colibri.Infrastructure;
+using Colibri.Models.Commands.Partners;
 using Colibri.Models.Commands.Portfolio;
 using Colibri.Models.Commands.Product;
 using Colibri.Models.Commands.Review;
@@ -19,8 +20,16 @@ public class ManageController : Controller
     private readonly IReviewService _reviewService;
     private readonly IProductService _productService;
     private readonly IPortfolioService _portfolioService;
+    private readonly IPartnersService _partnersService;
 
-    public ManageController(ILogger<ManageController> logger, ITeamMemberService teamMemberService, IPortfolioService portfolioService, IProductService productService, IReviewService reviewService, IStatisticService statisticService)
+
+    public ManageController(ILogger<ManageController> logger,
+        ITeamMemberService teamMemberService,
+        IPortfolioService portfolioService,
+        IProductService productService,
+        IReviewService reviewService,
+        IStatisticService statisticService,
+        IPartnersService partnersService)
     {
         _logger = logger;   
         _teamMemberService = teamMemberService;
@@ -28,6 +37,8 @@ public class ManageController : Controller
         _productService = productService;
         _reviewService = reviewService;
         _statisticService = statisticService;
+        _partnersService = partnersService;
+
     }
     
     public async Task<IActionResult> Index(CancellationToken token = default)
@@ -60,6 +71,12 @@ public class ManageController : Controller
         return View();
     }
     
+    public async Task<IActionResult> Partners(CancellationToken token = default)
+    {
+        ViewBag.Items = await _partnersService.GetAll(new GetAllPartnerCommand(), token);
+        return View();
+    }
+
     [HttpGet]
     [Route("addPortfolio")]
     public ActionResult AddPortfolio()
@@ -133,6 +150,21 @@ public class ManageController : Controller
     public async Task<ActionResult> EditTeamMember([FromRoute] int id, CancellationToken token = default)
     {
         ViewBag.Item = await _teamMemberService.Get(new GetTeamMemberCommand(id), token);
+        return View();
+    }
+    
+    [HttpGet]
+    [Route("addPartner")]
+    public ActionResult AddPartner()
+    {
+        return View();
+    }
+    
+    [HttpGet]
+    [Route("editPartner/{id}")]
+    public async Task<ActionResult> EditPartner([FromRoute] int id, CancellationToken token = default)
+    {
+        ViewBag.Item = await _partnersService.Get(new GetPartnerCommand(id), token);
         return View();
     }
 }

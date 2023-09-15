@@ -13,6 +13,7 @@ public static class ConfigureInfrastructureServices
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<IStatisticService, StatisticService>();
         services.AddScoped<IReviewService, ReviewService>();
+        services.AddScoped<IPartnersService, PartnersService>();
 
 
         return services;

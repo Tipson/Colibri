@@ -91,11 +91,12 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="wwwroot\images\partners" />
       <Folder Include="wwwroot\images\portfolios" />
       <Folder Include="wwwroot\images\products" />
       <Folder Include="wwwroot\images\reviews" />
-      <Folder Include="wwwroot\images\Statistics" />
-      <Folder Include="wwwroot\images\TeamMembers" />
+      <Folder Include="wwwroot\images\statistics" />
+      <Folder Include="wwwroot\images\teamMembers" />
     </ItemGroup>
 
 </Project>

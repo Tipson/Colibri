@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
+    List<Colibri.Models.Partners.Partner> itemList = ViewBag.Items;
+}
+
+@if (itemList != null || itemList.Count > 0)
+{
+
+    foreach (var item in itemList)
+    {
+        string style = (item.IsShow == 0) ? "tr-red" : "";
+        string button_caption = (item.IsShow == 1) ? @Localizer["Delete"].Value : @Localizer["Restore"].Value;
+        
+        <tr class="item @style" id="item@(item.Id)">
+            <td>@item.Name</td>
+            <td>@item.Type</td>
+            <td class="td-admin-tool">
+                <a href="javascript:void(0)" onclick="updateEvent(@item.Id)" id="delete@(item.Id)">@button_caption</a>
+                <a href="@Url.Action("editPartner", "Manage", new { id = item.Id })" onclick="javascript:event.stopPropagation();">Edit</a>
+                <input type="hidden" id="status@(item.Id)" value="@item.IsShow" />
+ 
+            </td>
+        </tr>
+    }
+}
