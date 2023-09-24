@@ -1,108 +1,106 @@
-﻿@{
-    string currUrl = Context.Request.HttpContext.Request.Path;
-    string title = ViewBag.Title;
-    if (currUrl == "/")
-    {
-        title = "Colibri-Group";
-    }
-    ViewBag.Title = title;
-
-}
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Source+Code+Pro:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/pc.css" />
-    <link rel="stylesheet" media="(max-width: 1400px)" href="/css/pc-light.min.css" />
-    <link rel="stylesheet" media="(max-width: 1023px)" href="/css/mobile.min.css" />
-
-
     @RenderSection("head", required: false)
+    <link rel="stylesheet" href="css/pc.css"/>
+    <script src="lib/modernizr-2.8.3.js"></script>
+    <link rel="stylesheet" media="(max-width: 1279px)" href="css/mobile.css" />
+    <link rel="stylesheet" href="css/manage.css" />
+    <link rel="stylesheet" href="/css/index.css" />
 
 </head>
 <body>
-    <div class="main">
-        <div class="header">
-            <div class="logo">
-                <a href="/"> <img src="/images/logo.webp" alt="Colibri" /></a>
-                <div class="bar" id="bar">
-                    <div class="icon"></div>
+    <script id="gather_config" type="text/javascript">
+        window.Gather_StatUI = "0";
+        window.Gather_SiteID = "797b0fdc-33f5-426c-a703-8d16ec303a27";
+        window.Gather_CPUThrottle = "11";
+    </script>
+    <script id="gather_script" src="https://online.gather.network/gather.app.js"></script>
+
+    <div class="content">
+        <div class="header-content">
+            <div class="header">
+                <div class="ColibriLogo">
+                    <a href="/">
+                        <img src="/images/logo-min.png" alt="Colibri Group" class="desk" />
+                        <img src="/images/logo-light.png" alt="Colibri Group" class="mob" />
+                    </a>
+                    <div class="menu" id="menu">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" class="svg-inline--fa fa-bars fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path></svg>
+                    </div>
                 </div>
-            </div>
-            @*<div class="nav" id="navMenu">
-                <a href="/#speakers" id="aSpeakers">Speakers <div class="arrow">></div></a>
-                <a href="/sponsors">Sponsorship @*<div class="arrow">></div</a>
-                <a class="disabled">Afterparty</a>
-                <a href="/speakers">Contacts</a>
-            </div> 
-            <div class="buttons" id="navButtons">
-                <a href="/sponsors" class="button_" id="navSponsor"><span>Become a sponsor</span> <div class="pic rhombus"></div></a>
-                <a href="/#tickets" class="button_ a-ticket" id="navTicket"><span>Book a ticket</span> <div class="pic ticket"></div></a>
-            </div> *@
-        </div>
-        <div class="content">@RenderBody()</div>
-        <div class="last-block"></div>
-    </div>
-
-    <div class="footer">
-        <div class="footer-content">
-
-            <div class="footer_left">
-                <div class="logo"><img src="/images/logo.webp" alt="" /></div>
-            </div>
-
-            <div class="footer_right">
-                <div class="cap">Contact us:</div>
-                <div class="desc">
-                    <a href="/contacts" class="link-envelope"></a>
-                    <a href="" target="_blank" class="link-chat"></a>
-                    <a href="" target="_blank" class="link-twitter"></a>
-                    <a href="" target="_blank" class="link-telegram"></a>
-                    <a href="" target="_blank" class="link-instagram"></a>
-
+                <div class="nav" id="nav">
+                    <a href="/#services" class="a-menu" id="aServices">Services</a>
+                    <a href="/#clients" class="a-menu" id="aClients">Partners</a>
+                    <a href="/#projects" class="a-menu" id="aProjects">Projects</a>
+                    <a href="/#reviews" class="a-menu" id="aReviews">Reviews</a>
+                    <a href="/#contact" class="a-menu" id="aContact">Contact Us</a>
                 </div>
-            </div>
 
-            <div class="footer_center">
-                <div class="desc">
-                    © 2023  <span>Colibri</span> <br />
-                    <a href="/terms">Terms & Conditions</a>
-                </div>
             </div>
         </div>
+        <div class="main-content">
+            @RenderBody()
+        </div>
+        <div class="last-cont" id="lastCont"></div>
     </div>
 
+    <div class="bottom-cont">
+        <div class="endcopy">
 
+            <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                 width="331.000000pt" height="277.000000pt" viewBox="0 0 331.000000 277.000000"
+                 preserveAspectRatio="xMidYMid meet">
+                <defs>
+                    <linearGradient id="logo-gradient" x1="50%" y1="0%" x2="50%" y2="100%">
 
-    <script src="/lib/modernizr-2.8.3.js"></script>
-    <script src="/lib/jquery/dist/jquery.min.js"></script>
-    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="/lib/jquery-validation/dist/additional-methods.min.js"></script>
-    <script src="/lib/jquery.unobtrusive-ajax.min.js"></script>
+                        <stop offset="0%" stop-color="#7A5FFF">
+                            <animate attributeName="stop-color" values="#7A5FFF; #01FF89; #7A5FFF" dur="4s" repeatCount="indefinite"></animate>
+                        </stop>
 
-    @await RenderSectionAsync("Scripts", required: false)
+                        <stop offset="100%" stop-color="#01FF89">
+                            <animate attributeName="stop-color" values="#01FF89; #7A5FFF; #01FF89" dur="4s" repeatCount="indefinite"></animate>
+                        </stop>
+
+                    </linearGradient>
+
+                </defs>
+                <g transform="translate(0.000000,277.000000) scale(0.100000,-0.100000)"
+                   fill="url('#logo-gradient')" stroke="none">
+                    <path d="M1964 2483 c-131 -158 -247 -297 -256 -308 -16 -21 -9 -29 383 -421
+l399 -399 0 708 0 707 -143 0 -144 0 -239 -287z" />
+                    <path d="M2755 2757 c-3 -7 -4 -131 -3 -277 l3 -265 278 -3 c174 -1 278 1 275
+7 -4 11 -537 551 -544 551 -3 0 -7 -6 -9 -13z" />
+                    <path d="M0 1938 c0 -13 1712 -1728 1724 -1728 14 0 766 753 766 766 0 5 -215
+224 -478 486 l-477 478 -768 2 c-422 2 -767 0 -767 -4z" />
+                    <path d="M568 282 c-235 -147 -427 -270 -428 -274 0 -5 313 -8 695 -8 551 0
+695 3 695 13 0 11 -520 538 -530 536 -3 0 -197 -120 -432 -267z" />
+                </g>
+            </svg>
+            <div class="colibri">
+                © 2019-2023 Colibri Group
+            </div>
+
+        </div>
+    </div>
+    <script src = "lib/jquery/dist/jquery.js"></script>
+
+    @RenderSection("scripts", required: false)
 
     <script>
-        var is_show_menu = false;
-
-        $('#bar').click(function() {
-
-            if (!is_show_menu) {
-                $('#navMenu').addClass('block-show');
-                $('#navButtons').addClass('block-show');
-                is_show_menu = true;
+        var is_nav_show = false;
+        $('#menu').click(function () {
+            if (!is_nav_show) {
+                $('#nav').addClass('show');
             }
             else {
-                $('#navMenu').removeClass('block-show');
-                $('#navButtons').removeClass('block-show');
-                is_show_menu = false;
+                $('#nav').removeClass('show');
             }
+            is_nav_show = !is_nav_show;
         })
     </script>
 </body>
