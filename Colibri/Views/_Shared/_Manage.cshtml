@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @RenderSection("head", required: false)
+    <link rel="stylesheet" href="css/manage.css"/>
+</head>
+<body>
+    <div class="content">
+        <div class="block-header">
+            <div class="header">
+                <a class="logo" href="/manage">
+                    <img src="/images/colibri-light.png" alt="Colibri" /><div class="cc">Colibri</div>
+                </a>
+                <div class="nav">
+                </div>
+            </div>
+        </div>
+        @RenderSection("underHead", required: false)
+        <div class="block-main">
+            @RenderBody()
+        </div>
+        <div class="cont last-cont" id="lastCont"></div>
+    </div>
+
+    <div id="bottomCont">
+        <div class="endcopy" id="copyCont">
+            © 2020  <strong>Colibri Group</strong><br />
+        </div>
+    </div>
+
+
+<script src="lib/modernizr-2.8.3.js"></script>
+<script src="lib/jquery/dist/jquery.js"></script>
+<script src="lib/"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

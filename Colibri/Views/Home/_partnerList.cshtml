@@ -1,0 +1,14 @@
+﻿@model List<Colibri.Models.Partner>
+@{
+    List<Colibri.Models.Partners.Partner> itemList = Model;
+}
+
+@if (itemList != null || itemList.Count > 0)
+{
+    foreach (Colibri.Models.Partners.Partner item in itemList)
+    {
+        <a class="partneritem" href="@item.Url" target="_blank">
+            <img src="/images/partners/@item.Logo" alt="@item.Name" />
+        </a>
+    }
+}
