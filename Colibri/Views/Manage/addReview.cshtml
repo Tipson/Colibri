@@ -11,11 +11,17 @@
 
 
     List<Portfolio>? reviews = ViewBag.Reviews;
-    
+    List<SelectListItem> impList = new List<SelectListItem>();
+
 
     Microsoft.Extensions.Primitives.StringValues queryVal;
     Context.Request.Query.TryGetValue("s", out queryVal);
     string status_style = (queryVal.Count == 0) ? "display: none" : "";
+    
+    for (int i = 0; i <= 10; ++i)
+    {
+        impList.Add(new SelectListItem() { Text = i.ToString(""), Value = i.ToString("") });
+    }
 }
 
 <div class="block-container-mid">
@@ -85,6 +91,20 @@
                     @Html.HiddenFor(model => model.Logo)
                 </div>
             </div>
+            
+            <div class="item m20">
+                <div class="caption">
+                    <label for="important">
+                        Importance
+                    </label>
+                </div>
+                <div class="input">
+                    <div class="input-drop">
+                        @Html.DropDownListFor(model => model.Importance, impList)
+                    </div>
+                </div>
+            </div>
+            
             
             <div class="item m10">
                 <div class="caption"> </div>

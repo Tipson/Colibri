@@ -7,11 +7,16 @@
     Layout = "~/Views/Shared/_Manage.cshtml";
     
     List<Review>? reviews = ViewBag.Reviews;
+    List<SelectListItem> impList = new List<SelectListItem>();
 
-    
     Microsoft.Extensions.Primitives.StringValues queryVal;
     Context.Request.Query.TryGetValue("s", out queryVal);
     string status_style = (queryVal.Count == 0) ? "display: none" : "";
+    
+    for (int i = 0; i <= 10; ++i)
+    {
+        impList.Add(new SelectListItem() { Text = i.ToString(""), Value = i.ToString("") });
+    }
     
     Review item = ViewBag.Item;
     Console.WriteLine(item);
@@ -86,6 +91,19 @@
                 </div>
             </div>
             
+            <div class="item m20">
+                <div class="caption">
+                    <label for="important">
+                        Importance
+                    </label>
+                </div>
+                <div class="input">
+                    <div class="input-drop">
+                        @Html.DropDownListFor(model => model.Importance, impList)
+                    </div>
+                </div>
+            </div>
+
             <div class="item m10">
                 <div class="caption"> </div>
                 <div class="input"><input type="submit" value=Save></div>
@@ -187,6 +205,10 @@
             
             $('#Photo').val('@item.Photo');
             $('#mediaList').html('<img src="/images/reviews/' + '@item.Photo' + '"/>');
+            
+            $('#Importance').val('@((int)item.Important)');
+            $('#Importance').change();
+                        
         })
     </script>
 }

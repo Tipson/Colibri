@@ -7,6 +7,7 @@ public class Review
     public string CompanyName { get; set; }
     public string Description { get; set; }
     public string Position { get; set; }
+    public ImportanceType Important { get; set; }
     public string Logo { get; set; }
     public string Photo { get; set; }
     public int IsShow { get; set; }
