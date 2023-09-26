@@ -13,6 +13,8 @@
 
     typeList.Add(new SelectListItem() { Text = "Partners", Value = "0" });
     typeList.Add(new SelectListItem() { Text = "Media Partner", Value = "1" });
+    typeList.Add(new SelectListItem() { Text = "Our Projects", Value = "2" });
+
 
     for (int i = 0; i <= 10; ++i)
     {
@@ -211,11 +213,9 @@
         });
 
         function successForm(data) {
-
             if (data != -1) {
-                location.href = '/manage/addPartner?s=1'
-            }
-            else if (data == -1) {
+                location.href = '/addPartner?s=1'
+            } else if (data == -1) {
                 $('#divValidationSummary li').remove();
                 $('#error').show();
             }

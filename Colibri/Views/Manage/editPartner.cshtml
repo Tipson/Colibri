@@ -11,6 +11,7 @@
 
     typeList.Add(new SelectListItem() { Text = "Partners", Value = "0" });
     typeList.Add(new SelectListItem() { Text = "Media Partner", Value = "1" });
+    typeList.Add(new SelectListItem() { Text = "Our Projects", Value = "2" });
 
     for (int i = 0; i <= 10; ++i)
     {
@@ -210,9 +211,8 @@
 
         function successForm(data) {
             if (data != -1) {
-                location.href = '/manage/editPartner/@item.Id?s=1'
-            }
-            else if (data == -1) {
+                location.href = '/editPartner/@(item.Id)?s=1'
+            } else if (data == -1) {
                 $('#divValidationSummary li').remove();
                 $('#error').show();
             }
@@ -237,11 +237,6 @@
 
             $('#Type').val('@((int)item.Type)');
             $('#Type').change();
-
- 
-            @*
-            $('#SynopsisType').val('@(item.SynopsisType)');
-            $('#SynopsisType').change();*@
 
             $('#Importance').val('@((int)item.Important)');
             $('#Importance').change();
