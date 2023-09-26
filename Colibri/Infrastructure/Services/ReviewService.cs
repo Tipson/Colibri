@@ -24,6 +24,7 @@ public class ReviewService : IReviewService
             command.CompanyName,
             command.Description,
             command.Position,
+            command.Importance,
             command.Logo,
             command.Photo,
             command.IsShow ? 1 : 0
@@ -58,10 +59,12 @@ public class ReviewService : IReviewService
     {
         var rows = await _dbContext.Reviews
             .AsNoTracking()
+            .OrderByDescending(r => r.Important)
+            .ThenBy(r => r.Id)
             .ToListAsync(token);
-        
+
         var model = _mapper.Map<List<Review>>(rows);
-        return model;        
+        return model;
     }
 
     public async Task<Review> Update(UpdateReviewCommand command, CancellationToken token)
@@ -81,6 +84,7 @@ public class ReviewService : IReviewService
         row.Logo = command.Logo;
         row.Photo = command.Photo;
         row.Description = command.Description;
+        row.Important = command.Importance;
         
         await _dbContext
             .SaveChangesAsync(token)

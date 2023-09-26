@@ -181,6 +181,9 @@ namespace Colibri.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Important")
+                        .HasColumnType("int");
+
                     b.Property<int>("IsShow")
                         .HasColumnType("int");
 

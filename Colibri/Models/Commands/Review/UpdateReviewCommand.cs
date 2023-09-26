@@ -6,5 +6,6 @@ public record UpdateReviewCommand(
     string CompanyName,
     string Description,
     string Position,
+    ImportanceType Importance,
     string Logo,
     string Photo);
