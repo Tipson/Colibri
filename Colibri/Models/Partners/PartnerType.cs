@@ -4,4 +4,5 @@ public enum PartnerType
 {
     Partners,
     MediaPartners,
+    OurProjects
 }

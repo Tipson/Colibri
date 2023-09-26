@@ -126,6 +126,7 @@ public class PartnersService : IPartnersService
         {
             MediaPartners = partnersGroupByType.SingleOrDefault(p => p.Key == PartnerType.MediaPartners)?.ToList(),
             Partners = partnersGroupByType.SingleOrDefault(p => p.Key == PartnerType.Partners)?.ToList(),
+            OurProjects = partnersGroupByType.SingleOrDefault(p => p.Key == PartnerType.OurProjects)?.ToList(),
         };
     }
 

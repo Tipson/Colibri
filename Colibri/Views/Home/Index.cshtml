@@ -1,10 +1,9 @@
 ﻿@{
     List<Colibri.Models.Partners.Partner>? partnersPartnersList = ViewBag.Partners.Partners;
     List<Colibri.Models.Partners.Partner>? mediaPartnersList = ViewBag.Partners.MediaPartners;
+    List<Colibri.Models.Partners.Partner>? ourProjectsList = ViewBag.Partners.OurProjects;
     List<Colibri.Models.Reviews.Review>? reviewsList = ViewBag.Reviews;
     List<Colibri.Models.TeamMembers.TeamMember>? teamMembersList = ViewBag.TeamMembers;
-    List<Colibri.Models.TeamMembers.TeamMember>? teamMembersList1 = ViewBag.TeamMembers;
-
 }
 
 <link
@@ -456,11 +455,7 @@
                 <h2 class="threeh2">Our Projects</h2>
             </div>
             <div class="partners">
-
-                <a class="partneritem" href="https://synopsis2021.com" target="_blank">
-                    <img src="/images/projects/synopsis.png" alt="Synopsis"/>
-                </a>
-
+                @Html.Partial("/views/home/_partnerList.cshtml", ourProjectsList)
             </div>
         </div>
     </div>
@@ -491,214 +486,9 @@
         <div class="reviews-carousel">
             <div class="reviews">
                 <div class="swiper">
-                <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="message">
-                        <div class="reviewstext">
-                            The entire Colibri Group team consists of professionals who can easily find a way out of any situation, will be able to adjust and help with both technical and substantive problems. The guys organize some of the best events on the blockchain and cryptocurrency market, where the quality of speakers and heated discussions is not inferior to a beautiful and fashionable design.
-                        </div>
-                        <div class="author">
-                            <div class="name">
-                                <span>
-                                    Maria Stankevich
-                                </span>
-                                <br/>
-                                Director, Institutional Business at OKX
-                            </div>
-                            <div class="photo" style="background-image:url('/Images/reviews/maria.png')"></div>
-                        </div>
+                    <div class="swiper-wrapper">
+                     @Html.Partial("/views/home/_reviewList.cshtml", reviewsList)
                     </div>
-                </div>
-                    
-                <div class="swiper-slide">
-                    <div class="message">
-                        <div class="reviewstext text-white">
-                            We’ve been working with Coindar & Colibri Group for some time now, they’re always there to support us in many forms, introducing us to new partners, helping us to expand our network & being our eyes and ears in the Russian market, managing our big community over there. It’s always a pleasure to be a part of their full of potential industry events such as Synopsis & DeFi Global Summit, we’re stronger together with our great partner network.
-                        </div>
-                        <div class="author">
-                            <div class="name">
-                                <span>Ayhan Gungor</span>
-                                <br/>
-                                CMO at Gather Network
-                            </div>
-                            <div class="photo" style="background-image:url('/images/Reviews/Ayhan.png')"></div>
-                        </div>
-                    </div>
-                </div>
-                    
-                <div class="swiper-slide">
-                    <div class="message">
-                        <div class="reviewstext text-green">
-                            We took part in the conference for the first time and were invited as co-organizers. It was a great honor for us to participate in the creation of such a large-scale event with our partners. We believe that Synopsis will help create a common space for communication between projects and create synergies for further cooperation.
-                        </div>
-                        <div class="author">
-                            <div class="name">
-                                <span>
-                                    Lihan Hyunwoo Lee
-                                </span>
-                                <br/>
-                                CEO at Xangle
-                            </div>
-                            <div class="photo" style="background-image:url('/Images/reviews/lihan.png')"></div>
-                        </div>
-                    </div>
-                </div>
-                    
-                <div class="swiper-slide">
-                    <div class="message">
-                        <div class="reviewstext">
-                            We are delighted to be working with Colibri Group and amazed by the confidence and professionalism displayed by all members of the team. We look forward to exploring more opportunities with Colibri in the future </div>
-                        <div class="author">
-                            <div class="name">
-                                <span>
-                                    Yoon Kim
-                                </span><br/>
-                                CEO & Founder ELYSIA
-                            </div>
-                            <div class="photo" style="background-image:url('/Images/reviews/Yoon.png')">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                    
-                <div class="swiper-slide">
-                    <div class="message">
-                        <div class="reviewstext text-white">
-                            I have always been impressed by the energetic and collaborative partnership with Colibri Group. Their master-level product&service always accurately highlights the uniqueness of a blockchain and adds value to it with their fantastic creations. Their devotion and enthusiasm always draw their partners closer to a common goal, nice and neat. To those who have not worked with Colibri Group yet, I'd say that you'd definitely enjoy your partnership with this group of elites and it is never too late. </div>
-                        <div class="author">
-                            <div class="name">
-                                <span>
-                                    Enzo Wang
-                                </span><br/>
-                                Co-founder of HeartBit
-                            </div>
-                            <div class="photo" style="background-image:url('/Images/reviews/Enzo.png')">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                    
-                <div class="swiper-slide">
-                    <div class="message">
-                        <div class="reviewstext text-green">
-                            We’ve had a wonderful experience working with the Colibri Group, and they’ve always been there to support ARPA & Bella Protocol when we needed it. They played an important role in helping us build and maintain our Eastern European community, grow our local influence in Eastern European area, and bring in exciting partnership opportunities within their resourceful crypto & blockchain network. We are more than happy with their service and will continue working with Colibri Group! </div>
-                        <div class="author">
-                            <div class="name">
-                                <span>
-                                    Felix Xu
-                                </span><br/>
-                                Co-Founder & Chief Executive Officer, ARPA & Bella Protocol
-                            </div>
-                            <div class="photo" style="background-image:url('/Images/reviews/Felix.png')">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="message">
-                        <div class="reviewstext">
-                            It is an absolute pleasure to work with the Colibri Group! The spectacular service team provided ARPA & Bella Protocol with undeniably one of the best services possible out there. We delivered a strong impact on the Eastern European crypto community thanks to them helping us reach out to potential partners, pairing our marketing materials with suitable channels, and fostering our user loyalty with sturdy relationship-building abilities. We will continue turning to Colibri Group for growth marketing services going forward. </div>
-                        <div class="author">
-                            <div class="name">
-                                <span>
-                                    Yemu Xu
-                                </span><br/>
-                                Co-Founder & Chief Growth Officer, ARPA & Bella Protocol
-                            </div>
-                            <div class="photo" style="background-image:url('/Images/reviews/Yemu.png')">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                    
-                            
-                <div class="swiper-slide">
-                    <div class="message">
-                        <div class="reviewstext text-white">
-                            Working with the Colibri Group team was an absolute pleasure. They supported us with networking, marketing, and biz dev support we didn't know we needed. The flexibility and professionalism is what the blockchain space needs to move forward. The summit brought our project great attention along with some new devout community members! </div>
-                        <div class="author">
-                            <div class="name">
-                                <span>
-                                    Anthony Blackburn
-                                </span><br/>
-                                Partnership Manager at Sui Foundation
-                            </div>
-                            <div class="photo" style="background-image:url('/Images/reviews/Antony.png')">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="message">
-                        <div class="reviewstext text-green">
-                            It is my pleasure to work with partners like Colibri Group to better serve our users. Calibri is known for their strength in their professions and the partnership offers strong support for Fairdesk. </div>
-                        <div class="author">
-                            <div class="name">
-                                <span>
-                                    Jacky Choi
-                                </span><br/>
-                                CEO and Co-founder of Fairdesk
-                            </div>
-                            <div class="photo" style="background-image:url('/Images/reviews/Jacky.png')">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                    
-                            
-                <div class="swiper-slide">
-                    <div class="message">
-                        <div class="reviewstext">
-                            It has been an absolute pleasure to work with the Colibri Group Team. It was a great honor to be invited to speak at the Synopsis Summit. It has been challenging through this pandemic to get together with our industry colleagues, but this event surpassed all expectations. The speakers were insightful and well organized. The event itself was top notch! </div>
-                        <div class="author">
-                            <div class="name">
-                                <span>
-                                    Jae Shin
-                                </span><br/>
-                                CMO at AERGO
-                            </div>
-                            <div class="photo" style="background-image:url('/Images/reviews/Jae.png')">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="message">
-                        <div class="reviewstext text-white">
-                            We've worked with Synopsis on many conferences now, both as a streaming partner and conference speaker. Synopsis events consistently draw a great roster of speakers and attendees, covering a wide variety of crypto projects and sectors. They've also been a real innovator in using NFTs as conference tickets and rewards, including using Theta NFTs and our ThetaPass tech to provide exclusive access to video streams. We look forward to continued collaboration with Synopsis events! </div>
-                        <div class="author">
-                            <div class="name">
-                                <span>
-                                    Wes Levitt
-                                </span><br/>
-                                Head Of Strategy at Theta Labs, Inc
-                            </div>
-                            <div class="photo" style="background-image:url('/Images/reviews/Wes.png')">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="message">
-                        <div class="reviewstext text-green">
-                            Synopsis summits are of great educational benefit for the blockchain industry and the crypto community, and are also an excellent platform for business meetings between speakers. It is always a pleasure to work with the Synopsis and Coindar teams. </div>
-                        <div class="author">
-                            <div class="name">
-                                <span>
-                                    Michael Cotton
-                                </span><br/>
-                                CPO at Optio Capital. Representative of Algorand
-                            </div>
-                            <div class="photo" style="background-image:url('/Images/reviews/Michael.png')">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
                 <div class="swiper-button-prev"></div>
                     <div class="swiper-button-next"></div>
                 </div>

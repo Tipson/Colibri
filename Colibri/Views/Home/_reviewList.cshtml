@@ -1,0 +1,29 @@
+﻿@model List<Colibri.Models.Reviews.Review>?
+@{
+    var itemList = Model;
+}
+
+
+@if (itemList != null)
+{
+    int i = 0;
+    foreach (Colibri.Models.Reviews.Review item in itemList)
+    {
+        <div class="swiper-slide">
+            <div class="message">
+                <div class="reviewstext">@item.Description</div>
+                <div class="author">
+                    <div class="name">
+                        <span>
+                            @item.Name
+                        </span>
+                        <br/>
+                        @item.Position
+                    </div>
+                    <div class="photo" style="background-image:url('/Images/reviews/@item.Photo')"></div>
+                </div>
+            </div>
+        </div>
+        ++i;
+    }
+}
