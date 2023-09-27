@@ -7,11 +7,14 @@
 @if (itemList != null)
 {
     int i = 0;
+    string[] styleClasses = new string[] { "text-green", "text-white","none"};
     foreach (Colibri.Models.Reviews.Review item in itemList)
     {
+        Random random = new Random();
+        int randomIndex = random.Next(0, styleClasses.Length);
         <div class="swiper-slide">
             <div class="message">
-                <div class="reviewstext">@item.Description</div>
+                <div class="reviewstext @styleClasses[randomIndex]">@item.Description</div>
                 <div class="author">
                     <div class="name">
                         <span>
