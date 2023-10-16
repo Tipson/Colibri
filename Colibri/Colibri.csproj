@@ -28,6 +28,7 @@
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+      <Content Remove="wwwroot\css\mobile2.css" />
     </ItemGroup>
 
     <ItemGroup>
