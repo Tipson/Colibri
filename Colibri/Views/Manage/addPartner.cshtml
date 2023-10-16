@@ -77,38 +77,6 @@
                     </div>
                 </div>
             </div>
-
-            @*@for (int i = 0; i < 6; i++)
-            {
-                <div class="item item-top m20">
-                    <div class="caption"></div>
-                    <div class="input">
-                        <div class="item-checkbox">
-                            @Html.CheckBoxFor(model => model.SynopsisVersions[i])
-                            <label for="SynopsisVersions_@(i)_">Version @(i + 1)</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="item item-top">
-                    <div class="caption"></div>
-                    <div class="input">
-                        <div class="item-checkbox">
-                            @Html.CheckBoxFor(model => model.IsParticipating)
-                            <label for="IsParticipating">@Localizer["Participating"]</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="item m10">
-                    <div class="caption"><label for="type">@Localizer["Type"]</label></div>
-                    <div class="input">
-                        <div class="input-drop">
-                            @Html.DropDownListFor(model => model.Types, typeList)
-                        </div>
-                    </div>
-                </div>
-            }*@
             
             <div class="item m10">
                 <div class="caption"><label for="type">@Localizer["Type"]</label></div>
@@ -164,7 +132,7 @@
             </div>
 
             <div class="item m10">
-                <div class="caption"> </div>
+                <div class="caption"> </div> 
                 <div class="input"><input type="submit" value=@Localizer["Add"] /></div>
             </div>
         </div>
