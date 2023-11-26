@@ -4,6 +4,7 @@ using Colibri.Configuration.Services;
 using Colibri.Infrastructure.DbContext;
 using Colibri.Infrastructure.Services;
 using Colibri.Middleware;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using NJsonSchema.Generation;
 
@@ -27,7 +28,15 @@ public class Startup
         services.AddLocalizationServices();
 
         services.AddDistributedMemoryCache();
-
+        
+        services.Configure<ForwardedHeadersOptions>(options =>
+        {
+            options.ForwardedHeaders = 
+                ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+            options.KnownNetworks.Clear();
+            options.KnownProxies.Clear();
+        });
+        
         services
             .AddControllers()
             .AddJsonOptions(
@@ -74,6 +83,8 @@ public class Startup
             colibriAuthDbContext.Database.Migrate();
         }
         
+        app.UseForwardedHeaders();
+
         app.UseHttpsRedirection();
         
         app.UseRequestLocalization();
